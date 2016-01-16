@@ -1,0 +1,78 @@
+﻿<Window
+    x:Class="YALV.AddFolderPath"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:YALV.Common" xmlns:Properties="clr-namespace:YALV.Properties"
+    Style="{StaticResource DefaultWindowStyle}"
+    Height="380"
+    Width="695"
+    Title="{x:Static Properties:Resources.SaveFolderPath_Title}"
+    WindowStartupLocation="CenterOwner">
+    <DockPanel
+        LastChildFill="True">
+
+        <StackPanel
+            DockPanel.Dock="Top">
+
+            <!-- MENU -->
+            <local:AddRemoveMenu />
+            
+            <!-- TOOLBAR -->
+            <local:AddRemoveToolbar
+                Style="{StaticResource DefaultToolbarStyle}" />
+        </StackPanel>
+
+        <!-- DATAGRID -->
+        <DataGrid
+            Style="{StaticResource DefaultDataGridStyle}"
+            Margin="5,3,5,5"
+            BorderBrush="{StaticResource BorderColor}"
+            BorderThickness="1"
+            CanUserAddRows="False"
+            CanUserDeleteRows="True"
+            ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
+            IsReadOnly="False"
+            ItemsSource="{Binding Path=PathList, Mode=OneWay}"
+            SelectedItem="{Binding Path=SelectedPath}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="150"
+                    Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                    Header="{x:Static Properties:Resources.AddFolderPath_Grid_NameColumn_Name}" />
+                <DataGridTemplateColumn
+                    Width="510"
+                    Header="{x:Static Properties:Resources.AddFolderPath_Grid_PathColumn_Name}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Margin="5,1,0,0"
+                                Text="{Binding Path=Path, Mode=OneWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <TextBox
+                                    Margin="0,-6"
+                                    HorizontalAlignment="Left"
+                                    MinWidth="484"
+                                    Text="{Binding Path=Path, UpdateSourceTrigger=PropertyChanged}"
+                                    TextAlignment="Left"
+                                    VerticalAlignment="Center" />
+                                <Button
+                                    Margin="1,0,0,0"
+                                    Width="22"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Window}}, Path=DataContext.CommandSelectFolder}">
+                                    <Image
+                                        Source="/Resources/Icons/select_folder.png" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</Window>

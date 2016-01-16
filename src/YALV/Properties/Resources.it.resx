@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MainWindow_DetailsBox_ItemId_Text" xml:space="preserve">
+    <value>Item Id:</value>
+  </data>
+  <data name="MainWindow_SelectionTooltip" xml:space="preserve">
+    <value>contatore elementi filtrati / contatore totale elementi</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessMessage" xml:space="preserve">
+    <value>Lista delle cartella salvata!</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessTitle" xml:space="preserve">
+    <value>Successo</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_AllFilesCaption" xml:space="preserve">
+    <value>Tutti i files</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_XmlFilesCaption" xml:space="preserve">
+    <value>Xml files</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Add_Log_File" xml:space="preserve">
+    <value>Aggiungi File di Log</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Open_Log_File" xml:space="preserve">
+    <value>Apri File di Log</value>
+  </data>
+  <data name="MainWindowVM_commandSelectFolderExecute_Description" xml:space="preserve">
+    <value>Seleziona Cartella dei Log</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmText" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare tutti i file selezionati?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmTitle" xml:space="preserve">
+    <value>Conferma Eliminazione</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmText" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare tutti i file selezionati?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmTitle" xml:space="preserve">
+    <value>Conferma Eliminazione</value>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessage_Text" xml:space="preserve">
+    <value>Cartella non trovata!
+[{0}]</value>
+    <comment>0 - folder path</comment>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessageText_Title" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Title" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Text" xml:space="preserve">
+    <value>Errore eliminazione file!
+[{0}]
+
+{1}</value>
+    <comment>0 - log file path, 1 - exception message</comment>
+  </data>
+  <data name="MainWindowVM_updateJumpList_CustomCategoryName" xml:space="preserve">
+    <value>Recenti</value>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Text" xml:space="preserve">
+    <value>File non leggibile!
+
+{0}</value>
+    <comment>0 - exception message</comment>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Title" xml:space="preserve">
+    <value>Attenzione</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFile_Header" xml:space="preserve">
+    <value>Aggiungi File...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFolderPath_Header" xml:space="preserve">
+    <value>Aggiungi Cartella ai Preferiti...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>Uscita</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Header" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_OpenFile_Header" xml:space="preserve">
+    <value>Apri File...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_RecentFiles_Header" xml:space="preserve">
+    <value>Recenti</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_SelectFolder_Header" xml:space="preserve">
+    <value>Seleziona Cartella...</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_Header" xml:space="preserve">
+    <value>Visualizza</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>Esplora Risorse Cartella Selezionata</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>Aggiorna Lista File</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshLog_Header" xml:space="preserve">
+    <value>Aggiorna Log</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_ClearFilters_Header" xml:space="preserve">
+    <value>Pulisci Filtri</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_DeleteFile_Header" xml:space="preserve">
+    <value>Elimina File</value>
+  </data>
+  <data name="Common_Components_MainMenu_AboutMenu_Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_ToolTip" xml:space="preserve">
+    <value>Apri File...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_Text" xml:space="preserve">
+    <value>APRI FILE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Tooltip" xml:space="preserve">
+    <value>Aggiungi File...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Text" xml:space="preserve">
+    <value>AGG. FILE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Tooltip" xml:space="preserve">
+    <value>Seleziona Cartella...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Text" xml:space="preserve">
+    <value>CARTELLA</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Tooltip" xml:space="preserve">
+    <value>Aggiungi Cartella ai Preferiti...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Text" xml:space="preserve">
+    <value>AGG. PATH</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Tooltip" xml:space="preserve">
+    <value>Aggiorna Log</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Text" xml:space="preserve">
+    <value>AGGIORNA</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Tooltip" xml:space="preserve">
+    <value>Pulisci Filtri</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Text" xml:space="preserve">
+    <value>PULISCI FILTRI</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Tooltip" xml:space="preserve">
+    <value>Elimina file selezionato</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Text" xml:space="preserve">
+    <value>ELIMINA FILE</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Tooltip" xml:space="preserve">
+    <value>Salva Preferiti</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Text" xml:space="preserve">
+    <value>SALVA</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Tooltip" xml:space="preserve">
+    <value>Aggiungi Cartella ai Preferiti</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Text" xml:space="preserve">
+    <value>AGGIUNGI</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Tooltip" xml:space="preserve">
+    <value>Rimuovi la Cartella Selezionata dai Preferiti</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Text" xml:space="preserve">
+    <value>RIMUOVI</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_AddNewItem_Header" xml:space="preserve">
+    <value>Aggiungi un Nuovo Elemento</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Header" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_RemoveSelectedItem_Header" xml:space="preserve">
+    <value>Rimuovi Percorso dai Preferiti</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_SaveList_Header" xml:space="preserve">
+    <value>Salva Lista</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>Uscita</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Logger_Text" xml:space="preserve">
+    <value>Logger:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Level_Text" xml:space="preserve">
+    <value>Livello:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeStamp_Text" xml:space="preserve">
+    <value>Time Stamp:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeDiff_Text" xml:space="preserve">
+    <value>Δ [diff temporale con log precedente]:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_MachineName_Text" xml:space="preserve">
+    <value>Machine Name:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_HostName_Text" xml:space="preserve">
+    <value>Host Name:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_UserName_Text" xml:space="preserve">
+    <value>Nome Utente:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Application_Text" xml:space="preserve">
+    <value>App:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Thread_Text" xml:space="preserve">
+    <value>Thread:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Message_Text" xml:space="preserve">
+    <value>Messaggio:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Throwable_Text" xml:space="preserve">
+    <value>Throwable:</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_Checkbox_Text" xml:space="preserve">
+    <value>Auto Refresh</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_DecreaseInterval_Tooltip" xml:space="preserve">
+    <value>Decrementa Intervallo</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_RefreshInterval_Tooltip" xml:space="preserve">
+    <value>Intervallo di aggiornamento</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_IncreaseInterval_Tooltip" xml:space="preserve">
+    <value>Incrementa Intervallo</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Class_Text" xml:space="preserve">
+    <value>Classe:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Method_Text" xml:space="preserve">
+    <value>Metodo:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_File_Text" xml:space="preserve">
+    <value>File:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Line_Text" xml:space="preserve">
+    <value>Linea:</value>
+  </data>
+  <data name="MainWindow_MergeFile_Tooltip" xml:space="preserve">
+    <value>Seleziona File per il Merge</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_DeleteFile_Header" xml:space="preserve">
+    <value>Elimina File</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>Aggiorna Lista File</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>Apri Cartella Selezionata</value>
+  </data>
+  <data name="MainWindow_ShowHideGroupBox_Header" xml:space="preserve">
+    <value>MOSTRA/NASCONDI</value>
+  </data>
+  <data name="MainWindow_SelectionGroupBox_Header" xml:space="preserve">
+    <value>SELEZIONE</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="SaveFolderPath_Title" xml:space="preserve">
+    <value>YALV! - Salva Percorso Cartella</value>
+  </data>
+  <data name="AddFolderPath_Grid_NameColumn_Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="AddFolderPath_Grid_PathColumn_Name" xml:space="preserve">
+    <value>Percorso</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>YALV! - About</value>
+  </data>
+  <data name="About_Header_Text" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="About_AboutGroupBox_Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About_CreditsGroupBox_Header" xml:space="preserve">
+    <value>Crediti</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Header" xml:space="preserve">
+    <value>Configurazione Log4Net</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample1_Title" xml:space="preserve">
+    <value>Esempio 1:</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample2_Title" xml:space="preserve">
+    <value>Esempio 2:</value>
+  </data>
+  <data name="FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip" xml:space="preserve">
+    <value>Filtro {0}</value>
+  </data>
+  <data name="GlobalHelper_DISPLAY_DATETIME_FORMAT" xml:space="preserve">
+    <value>MMM d, HH:mm:ss.fff</value>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Text" xml:space="preserve">
+    <value>Errore salvataggio file Preferiti!
+[{0}]
+
+{1}</value>
+    <comment>0 - folder path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Title" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Text" xml:space="preserve">
+    <value>Errore lettura file Preferiti!
+[{0}]
+
+{1}</value>
+    <comment>0 - folder list file path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Title" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Text" xml:space="preserve">
+    <value>Errore lettura file di log!
+[{0}]
+
+{1}</value>
+    <comment>0 - log file path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Title" xml:space="preserve">
+    <value>Errore</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Positive_Text" xml:space="preserve">
+    <value>+{0} s</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_IdColumn_Header" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_TimeStampColumn_Header" xml:space="preserve">
+    <value>TimeStamp</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LevelColumn_Header" xml:space="preserve">
+    <value>Livello</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MessageColumn_Header" xml:space="preserve">
+    <value>Messaggio</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LoggerColumn_Header" xml:space="preserve">
+    <value>Logger</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MachineNameColumn_Header" xml:space="preserve">
+    <value>MachineName</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_HostNameColumn_Header" xml:space="preserve">
+    <value>HostName</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_UserNameColumn_Header" xml:space="preserve">
+    <value>NomeUtente</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_AppColumn_Header" xml:space="preserve">
+    <value>App</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ThreadColumn_Header" xml:space="preserve">
+    <value>Thread</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ClassColumn_Header" xml:space="preserve">
+    <value>Classe</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MethodColumn_Header" xml:space="preserve">
+    <value>Metodo</value>
+  </data>
+  <data name="MainWindow_GridContextMenu_CopyToClipboard" xml:space="preserve">
+    <value>Copia su Clipboard</value>
+  </data>
+  <data name="MainWindowVM_AutoRefreshIntervalLocalized_Format" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>it-IT</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Negative_Text" xml:space="preserve">
+    <value>-{0} s</value>
+  </data>
+  <data name="MainWindow_FullDateTimeFormatWithMilliseconds" xml:space="preserve">
+    <value>dddd, MMMM d, yyyy h:mm:ss.fff tt</value>
+  </data>
+  <data name="CircularProgressBar_CircularProgressBar_BusyText" xml:space="preserve">
+    <value>Caricamento...</value>
+  </data>
+  <data name="About_Version_Text" xml:space="preserve">
+    <value>Versione {0}</value>
+    <comment>0 - FileVersionInfo</comment>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>YALV! è un visualizzatore di log per Log4Net che permette di confrontare file di log multipli contemporaneamente.
+
+CARATTERISTICHE PRINCIPALI:
+- Merge dei file di log
+- Filtraggio dinamico
+- Mostra/nascondi livelli di log
+- Salvataggio dei percorsi delle cartelle di logs
+- Apertura file utilizzati di recente
+- Ordinamento delle colonne visualizzate
+
+Il file di configurazione di Log4Net deve essere impostato con il layout XmlLayoutSchemaLog4j; sono necessarie poche righe nel file di configurazione dell'applicazione per utilizzare questo formato (vedi esempi a destra).
+
+Si tratta di un'applicazione WPF basata sul .NET Framework 4.0 e scritta con il linguaggio C#.</value>
+  </data>
+</root>

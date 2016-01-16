@@ -1,0 +1,1023 @@
+﻿<Window
+    x:Class="YALV.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:YALV.Common.Converters"
+    xmlns:local="clr-namespace:YALV.Common" xmlns:Properties="clr-namespace:YALV.Properties"
+    xmlns:yalv="clr-namespace:YALV" Style="{StaticResource DefaultWindowStyle}"
+    Height="650"
+    Width="1250"
+    Title="{x:Static Properties:Resources.MainWindow_Title}"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <converters:BoolToOppositeVisibilityConverter
+            x:Key="BoolToOppositeVisibilityConverter" />
+        <converters:BoolToVisibilityConverter
+            x:Key="BoolToVisibilityConverter" />
+        <converters:MultiValueEqualsToBoolConverter
+            x:Key="MultiValueEqualsToBoolConverter" />
+        <converters:LevelToSolidColorConverter
+            x:Key="LevelToSolidColorConverter" />
+        <converters:StringEmptyToVisibilityConverter
+            x:Key="StringEmptyToVisibilityConverter" />
+        <converters:TimeDeltaDoubleToLocalizedStringConverter
+            x:Key="TimeDeltaDoubleToLocalizedStringConverter" />
+        
+        <ContextMenu
+            x:Key="FilesListBoxContextMenu">
+            <MenuItem
+                Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_DeleteFile_Header}"
+                Command="{Binding Path=CommandDelete}" />
+            <MenuItem
+                Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_RefreshFileList_Header}"
+                Command="{Binding Path=CommandRefreshFiles}" />
+            <MenuItem
+                Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_OpenSelectedFolder_Header}"
+                Command="{Binding Path=CommandOpenSelectedFolder}" />
+        </ContextMenu>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Command="{Binding Path=CommandRefreshFiles}"
+            Key="F5"
+            Modifiers="Control" />
+        <KeyBinding
+            Command="{Binding Path=CommandRefresh}"
+            Key="F5" />
+        <KeyBinding
+            Command="{Binding Path=CommandClear}"
+            Key="D"
+            Modifiers="Control" />
+        <KeyBinding
+            Command="{Binding Path=CommandDelete}"
+            Key="DELETE" />
+    </Window.InputBindings>
+
+    <Grid
+        Name="contentGrid"
+        local:BusyIndicatorBehavior.BusyState="{Binding IsLoading}"
+        local:BusyIndicatorBehavior.TargetVisual="{Binding ElementName=contentGrid}">
+        <DockPanel
+            LastChildFill="True">
+
+            <!-- TOP -->
+            <StackPanel
+                DockPanel.Dock="Top"
+                Orientation="Vertical">
+
+                <!-- MENU -->
+                <local:MainMenu
+                    x:Name="mainMenu" />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition
+                            Width="*">
+                        </ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- TOOLBAR -->
+                    <local:MainToolbar
+                        Style="{StaticResource DefaultToolbarStyle}"
+                        Grid.Column="0"
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left" />
+
+                    <StackPanel
+                        Grid.Column="2"
+                        Margin="0,0,10,0"
+                        Orientation="Horizontal">
+
+                        <!-- SELECTION -->
+                        <GroupBox
+                            Margin="0,3,0,5"
+                            Padding="4,6,4,1"
+                            FontSize="9"
+                            Header="{x:Static Properties:Resources.MainWindow_SelectionGroupBox_Header}"
+                            VerticalAlignment="Top">
+                            <StackPanel
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+
+                                <StackPanel.Resources>
+                                    <Style
+                                        x:Key="tbCountStyle"
+                                        TargetType="TextBlock">
+                                        <Setter
+                                            Property="Margin"
+                                            Value="0,3,0,0" />
+                                        <Setter
+                                            Property="FontSize"
+                                            Value="11" />
+                                        <Setter
+                                            Property="TextAlignment"
+                                            Value="Center" />
+                                        <Setter
+                                            Property="ToolTip"
+                                            Value="{x:Static Properties:Resources.MainWindow_SelectionTooltip}" />
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <!-- ALL -->
+                                <StackPanel
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonAll}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="Items.Count" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <!-- DEBUG -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonDebug}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsDebugFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsDebugCount" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <!-- INFO -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonInfo}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsInfoFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsInfoCount" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <!-- WARN -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonWarn}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsWarnFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsWarnCount" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <!-- ERROR -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonError}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsErrorFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsErrorCount" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                                <!-- FATAL -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonFatal}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsFatalFilterCount" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsFatalCount" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- SHOW/HIDE -->
+                        <GroupBox
+                            Margin="10,3,0,0"
+                            Padding="0,6,5,5"
+                            FontSize="9"
+                            Header="{x:Static Properties:Resources.MainWindow_ShowHideGroupBox_Header}"
+                            VerticalAlignment="Top">
+                            <StackPanel
+                                Orientation="Horizontal">
+
+                                <StackPanel.Resources>
+                                    <Style
+                                        BasedOn="{StaticResource DefaultBorderStyle}"
+                                        TargetType="{x:Type Border}">
+                                        <Setter
+                                            Property="Padding"
+                                            Value="2" />
+                                        <Setter
+                                            Property="Margin"
+                                            Value="10,0,0,0" />
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Border
+                                    Background="{StaticResource DebugLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelDebug}"
+                                        Name="chkShowDebug"
+                                        ToolTip="DEBUG" />
+                                </Border>
+
+                                <Border
+                                    Background="{StaticResource InfoLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelInfo}"
+                                        Name="chkShowInfo"
+                                        ToolTip="INFO" />
+                                </Border>
+
+                                <Border
+                                    Background="{StaticResource WarnLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelWarn}"
+                                        Name="chkShowWarn"
+                                        ToolTip="WARN" />
+                                </Border>
+
+                                <Border
+                                    Background="{StaticResource ErrorLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelError}"
+                                        Name="chkShowError"
+                                        ToolTip="ERROR" />
+                                </Border>
+
+                                <Border
+                                    Background="{StaticResource FatalLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelFatal}"
+                                        Name="chkShowFatal"
+                                        ToolTip="FATAL" />
+                                </Border>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+
+            <!-- BOTTOM -->
+            <DockPanel
+                DockPanel.Dock="Bottom">
+
+                <StackPanel
+                    DockPanel.Dock="Left"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <CheckBox
+                        Name="chkAutoRefresh"
+                        Margin="3,0,0,0"
+                        VerticalAlignment="Center"
+                        FontWeight="DemiBold"
+                        Content="{x:Static Properties:Resources.MainWindow_AutoRefresh_Checkbox_Text}"
+                        IsChecked="{Binding Path=IsAutoRefreshEnabled}" />
+                    <StackPanel
+                        Visibility="{Binding Path=IsChecked, ElementName=chkAutoRefresh, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Margin="3,0,0,0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <RepeatButton
+                            ToolTip="{x:Static Properties:Resources.MainWindow_AutoRefresh_DecreaseInterval_Tooltip}"
+                            Height="17"
+                            VerticalAlignment="Center"
+                            Focusable="False"
+                            Background="{x:Null}"
+                            Command="{Binding Path=CommandDecreaseInterval}">
+                            <TextBlock
+                                Margin="0,-2,0,0"
+                                Text="&lt;" />
+                        </RepeatButton>
+                        <Border
+                            MinWidth="36"
+                            BorderBrush="Gray"
+                            BorderThickness="1,1"
+                            CornerRadius="2"
+                            Padding="1">
+                            <TextBlock
+                                FontSize="11"
+                                TextAlignment="Right"
+                                ToolTip="{x:Static Properties:Resources.MainWindow_AutoRefresh_RefreshInterval_Tooltip}"
+                                Text="{Binding Path=AutoRefreshIntervalLocalized, Mode=OneWay}" />
+                        </Border>
+                        <RepeatButton
+                            ToolTip="{x:Static Properties:Resources.MainWindow_AutoRefresh_IncreaseInterval_Tooltip}"
+                            Height="17"
+                            VerticalAlignment="Center"
+                            Focusable="False"
+                            Background="{x:Null}"
+                            Command="{Binding Path=CommandIncreaseInterval}">
+                            <TextBlock
+                                Margin="0,-2,0,0"
+                                Text="&gt;" />
+                        </RepeatButton>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel
+                    DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+                    <StackPanel.Resources>
+                        <Style
+                            x:Key="LabelBaseStyle"
+                            TargetType="{x:Type TextBlock}">
+                            <Setter
+                                Property="FontSize"
+                                Value="{StaticResource DefaultFontSize}">
+                            </Setter>
+                            <Setter
+                                Property="FontWeight"
+                                Value="DemiBold">
+                            </Setter>
+                            <Setter
+                                Property="HorizontalAlignment"
+                                Value="Left">
+                            </Setter>
+                        </Style>
+                        <Style
+                            x:Key="TextBlockBaseStyle"
+                            TargetType="{x:Type TextBlock}">
+                            <Setter
+                                Property="FontSize"
+                                Value="{StaticResource DefaultFontSize}">
+                            </Setter>
+                            <Setter
+                                Property="Margin"
+                                Value="3,0,0,0">
+                            </Setter>
+                            <Setter
+                                Property="MinWidth"
+                                Value="80">
+                            </Setter>
+                        </Style>
+                        <Style
+                            x:Key="PanelBaseStyle"
+                            TargetType="{x:Type StackPanel}">
+                            <Setter
+                                Property="Margin"
+                                Value="20,3,5,3">
+                            </Setter>
+                            <Setter
+                                Property="Orientation"
+                                Value="Horizontal">
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <StackPanel
+                        Style="{StaticResource PanelBaseStyle}">
+                        <TextBlock
+                            Style="{StaticResource LabelBaseStyle}"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Class_Text}">
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource TextBlockBaseStyle}"
+                            Text="{Binding Path=SelectedLogItem.Class, Mode=OneWay}">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Style="{StaticResource PanelBaseStyle}">
+                        <TextBlock
+                            Style="{StaticResource LabelBaseStyle}"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Method_Text}">
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource TextBlockBaseStyle}"
+                            Text="{Binding Path=SelectedLogItem.Method, Mode=OneWay}">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Style="{StaticResource PanelBaseStyle}">
+                        <TextBlock
+                            Style="{StaticResource LabelBaseStyle}"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_File_Text}">
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource TextBlockBaseStyle}"
+                            Text="{Binding Path=SelectedLogItem.File, Mode=OneWay}">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Style="{StaticResource PanelBaseStyle}">
+                        <TextBlock
+                            Style="{StaticResource LabelBaseStyle}"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Line_Text}">
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource TextBlockBaseStyle}"
+                            Text="{Binding Path=SelectedLogItem.Line, Mode=OneWay}">
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+
+            <!-- LEFT -->
+            <Grid
+                DockPanel.Dock="Left"
+                Width="250">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="*">
+                    </RowDefinition>
+                    <RowDefinition
+                        Height="Auto">
+                    </RowDefinition>
+                    <RowDefinition
+                        Height="*">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DockPanel
+                    Grid.Row="0"
+                    LastChildFill="True">
+                    <DockPanel
+                        DockPanel.Dock="Top"
+                        LastChildFill="True">
+                        <ToggleButton
+                            DockPanel.Dock="Right"
+                            Margin="1,0,0,0"
+                            Width="22"
+                            IsChecked="{Binding Path=IsFileSelectionEnabled}"
+                            ToolTip="{x:Static Properties:Resources.MainWindow_MergeFile_Tooltip}"
+                            VerticalAlignment="Stretch">
+                            <Image
+                                Source="/Resources/Icons/selection.png" />
+                        </ToggleButton>
+                        <ComboBox
+                            Height="22"
+                            IsEditable="False"
+                            ItemsSource="{Binding Path=FolderList, Mode=OneWay}"
+                            SelectedItem="{Binding Path=SelectedFolder}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Margin="0,0,0,2"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            FontWeight="DemiBold"
+                                            Text="{Binding Path=Name, Mode=OneWay}" />
+                                        <TextBlock
+                                            FontSize="11"
+                                            Foreground="#FF595959"
+                                            Text="{Binding Path=Path, Mode=OneWay, StringFormat='{}[{0}]'}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </DockPanel>
+
+                    <Grid>
+                        <ListBox
+                            BorderBrush="{StaticResource GrayGradientBackground}"
+                            BorderThickness="1,1,1,0"
+                            ContextMenu="{StaticResource FilesListBoxContextMenu}"
+                            IsSynchronizedWithCurrentItem="True"
+                            ItemsSource="{Binding Path=FileList, Mode=OneWay}"
+                            SelectedItem="{Binding Path=SelectedFile}"
+                            SelectionMode="Single"
+                            Visibility="{Binding Path=IsFileSelectionEnabled, Mode=OneWay, Converter={StaticResource BoolToOppositeVisibilityConverter}}">
+                            <ListBox.ItemContainerStyle>
+                                <Style
+                                    TargetType="ListBoxItem">
+                                    <Style.Resources>
+                                        <SolidColorBrush
+                                            x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                            Color="Teal" />
+                                        <!--
+                                        <SolidColorBrush
+                                            x:Key="{x:Static SystemColors.ControlBrushKey}"
+                                            Color="Transparent" />
+                                        -->
+                                    </Style.Resources>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Path=FileName, Mode=OneWay, FallbackValue=''}"
+                                        ToolTip="{Binding Path=Path, Mode=OneWay}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <ListBox
+                            BorderBrush="{StaticResource GrayGradientBackground}"
+                            BorderThickness="1,1,1,0"
+                            ContextMenu="{StaticResource FilesListBoxContextMenu}"
+                            IsSynchronizedWithCurrentItem="True"
+                            ItemsSource="{Binding Path=FileList, Mode=OneWay}"
+                            SelectionMode="Single"
+                            Visibility="{Binding Path=IsFileSelectionEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <ListBox.ItemContainerStyle>
+                                <Style
+                                    TargetType="ListBoxItem">
+                                    <Style.Resources>
+                                        <SolidColorBrush
+                                            x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                            Color="Transparent" />
+                                        <SolidColorBrush
+                                            x:Key="{x:Static SystemColors.ControlBrushKey}"
+                                            Color="Transparent" />
+                                    </Style.Resources>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        ToolTip="{Binding Path=Path, Mode=OneWay}">
+                                        <!--
+                                        <Polygon
+                                            Margin="0,0,2,0"
+                                            Name="fIndicator"
+                                            Points="0,0 6,5 0,10 0,0"
+                                            VerticalAlignment="Center" />
+                                        -->
+                                        <CheckBox
+                                            Content="{Binding Path=FileName, Mode=OneWay, FallbackValue=''}"
+                                            IsChecked="{Binding Path=Checked, FallbackValue=False}"
+                                            Name="fCheck"
+                                            VerticalAlignment="Center" />
+                                        <Border
+                                            Height="7"
+                                            Margin="5,1,0,0"
+                                            Width="7"
+                                            Background="Transparent"
+                                            CornerRadius="3"
+                                            Name="fIndicator"
+                                            VerticalAlignment="Center">
+                                        </Border>
+                                    </StackPanel>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger
+                                            Value="True">
+                                            <DataTrigger.Binding>
+                                                <MultiBinding
+                                                    Converter="{StaticResource MultiValueEqualsToBoolConverter}">
+                                                    <Binding
+                                                        Mode="OneWay"
+                                                        Path="Path">
+                                                    </Binding>
+                                                    <Binding
+                                                        ElementName="dgItems"
+                                                        Mode="OneWay"
+                                                        Path="SelectedItem.Path">
+                                                    </Binding>
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <Setter
+                                                Property="Background"
+                                                TargetName="fIndicator"
+                                                Value="Teal">
+                                            </Setter>
+                                            <Setter
+                                                Property="Foreground"
+                                                TargetName="fCheck"
+                                                Value="Teal">
+                                            </Setter>
+                                            <Setter
+                                                Property="FontWeight"
+                                                TargetName="fCheck"
+                                                Value="Bold">
+                                            </Setter>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+
+                </DockPanel>
+
+                <GridSplitter
+                    Style="{StaticResource DefaultGridSplitterStyle}"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    ResizeDirection="Rows">
+                </GridSplitter>
+
+                <Border
+                    Grid.Row="2"
+                    BorderBrush="Silver"
+                    BorderThickness="0,0,1,1">
+
+                    <ScrollViewer
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style
+                                    x:Key="LabelBaseStyle"
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="FontSize"
+                                        Value="{StaticResource DefaultFontSize}">
+                                    </Setter>
+                                    <Setter
+                                        Property="FontWeight"
+                                        Value="DemiBold">
+                                    </Setter>
+                                    <Setter
+                                        Property="HorizontalAlignment"
+                                        Value="Left">
+                                    </Setter>
+                                </Style>
+                                <Style
+                                    x:Key="TextBlockBaseStyle"
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="FontSize"
+                                        Value="{StaticResource DefaultFontSize}">
+                                    </Setter>
+                                    <Setter
+                                        Property="Margin"
+                                        Value="0,1">
+                                    </Setter>
+                                </Style>
+                                <Style
+                                    x:Key="PanelBaseStyle"
+                                    TargetType="{x:Type StackPanel}">
+                                    <Setter
+                                        Property="Margin"
+                                        Value="2,3">
+                                    </Setter>
+                                    <Setter
+                                        Property="Orientation"
+                                        Value="Vertical">
+                                    </Setter>
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <TextBlock
+                                Text="">
+                            </TextBlock>
+
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_ItemId_Text}"
+>
+                                </TextBlock>
+                                <TextBox
+                                    Margin="0,1"
+                                    MinWidth="42"
+                                    HorizontalAlignment="Left"
+                                    FontSize="{StaticResource DefaultFontSize}"
+                                    FontStyle="Italic"
+                                    Text="{Binding Path=GoToLogItemId, UpdateSourceTrigger=PropertyChanged}" />
+                                <!--
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.Id, Mode=OneWay}">
+                                </TextBlock>
+                                -->
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Logger_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.Logger, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Level_Text}">
+                                </TextBlock>
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Style="{StaticResource TextBlockBaseStyle}"
+                                        MinWidth="38"
+                                        Text="{Binding Path=SelectedLogItem.Level, Mode=OneWay}">
+                                    </TextBlock>
+                                    <Border
+                                        Height="11"
+                                        Margin="2,0,0,0"
+                                        Width="11"
+                                        Background="{Binding Path=SelectedLogItem.LevelIndex, Mode=OneWay, Converter={StaticResource LevelToSolidColorConverter}}"
+                                        BorderBrush="{StaticResource BorderColor}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        VerticalAlignment="Center"
+                                        Visibility="{Binding Path=SelectedLogItem.Level, Mode=OneWay, Converter={StaticResource StringEmptyToVisibilityConverter}, FallbackValue=Collapsed}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_TimeStamp_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}">
+                                    <TextBlock.Text>
+                                        <Binding
+                                                Mode="OneWay"
+                                                StringFormat="{x:Static Properties:Resources.MainWindow_FullDateTimeFormatWithMilliseconds}"
+                                                ConverterCulture="{x:Static yalv:MainWindow.ResolvedCulture}"
+                                                Path="SelectedLogItem.TimeStamp"
+                                            />
+                                        
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_TimeDiff_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.Delta, Mode=OneWay,  Converter={StaticResource TimeDeltaDoubleToLocalizedStringConverter}}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_MachineName_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.MachineName, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_HostName_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.HostName, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_UserName_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.UserName, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Application_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.App, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Style="{StaticResource PanelBaseStyle}">
+                                <TextBlock
+                                    Style="{StaticResource LabelBaseStyle}"
+                                    Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Thread_Text}">
+                                </TextBlock>
+                                <TextBlock
+                                    Style="{StaticResource TextBlockBaseStyle}"
+                                    Text="{Binding Path=SelectedLogItem.Thread, Mode=OneWay}">
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </ScrollViewer>
+                </Border>
+
+            </Grid>
+
+            <!-- RIGHT -->
+            <Grid
+                DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="*">
+                    </RowDefinition>
+                    <RowDefinition
+                        Height="Auto">
+                    </RowDefinition>
+                    <RowDefinition
+                        Height="*">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DockPanel
+                    Grid.Row="0"
+                    LastChildFill="True">
+
+                    <Border
+                        DockPanel.Dock="Top">
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Disabled"
+                            local:ScrollSynchronizer.ScrollGroup="dgSync">
+                            <StackPanel
+                                Margin="0,0,25,0"
+                                Background="Transparent"
+                                Name="txtSearchPanel"
+                                Orientation="Horizontal" />
+                        </ScrollViewer>
+                    </Border>
+
+                    <DataGrid
+                        Style="{StaticResource DefaultDataGridStyle}"
+                        Margin="0,1,0,0"
+                        CellStyle="{StaticResource DefaultDataGridCellStyle}"
+                        ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
+                        IsSynchronizedWithCurrentItem="True"
+                        Name="dgItems"
+                        SelectedItem="{Binding Path=SelectedLogItem}"
+                        RowStyle="{StaticResource LogItemDataGridRowStyle}">
+
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem
+                                    Header="{x:Static Properties:Resources.MainWindow_GridContextMenu_CopyToClipboard}"
+                                    Command="ApplicationCommands.Copy" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+
+                        <DataGrid.Resources>
+                            <Style
+                                TargetType="ScrollViewer">
+                                <Setter
+                                    Property="local:ScrollSynchronizer.ScrollGroup"
+                                    Value="dgSync" />
+                            </Style>
+                            <SolidColorBrush
+                                x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                Color="#19000000" />
+                        </DataGrid.Resources>
+                    </DataGrid>
+                </DockPanel>
+
+                <GridSplitter
+                    Style="{StaticResource DefaultGridSplitterStyle}"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    ResizeDirection="Rows">
+                </GridSplitter>
+
+                <Grid
+                    Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*">
+                        </ColumnDefinition>
+                        <ColumnDefinition
+                            Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition
+                            Width="2.5*">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel
+                        Grid.Column="0"
+                        LastChildFill="True">
+                        <TextBlock
+                            DockPanel.Dock="Top"
+                            Margin="1,0,0,0"
+                            FontWeight="DemiBold"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Message_Text}">
+                        </TextBlock>
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+                            <TextBox
+                                BorderBrush="Silver"
+                                BorderThickness="0,1"
+                                IsReadOnly="True"
+                                Text="{Binding Path=SelectedLogItem.Message, Mode=OneWay}"
+                                TextWrapping="Wrap">
+                            </TextBox>
+                        </ScrollViewer>
+                    </DockPanel>
+
+                    <GridSplitter
+                        Style="{StaticResource DefaultGridSplitterStyle}"
+                        Grid.Column="1"
+                        Margin="0,15,0,0"
+                        ResizeBehavior="PreviousAndNext"
+                        ResizeDirection="Columns"
+                        VerticalAlignment="Stretch">
+                    </GridSplitter>
+
+                    <DockPanel
+                        Grid.Column="2"
+                        LastChildFill="True">
+                        <TextBlock
+                            DockPanel.Dock="Top"
+                            Margin="1,0,0,0"
+                            FontWeight="DemiBold"
+                            Text="{x:Static Properties:Resources.MainWindow_DetailsBox_Throwable_Text}">
+                        </TextBlock>
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+                            <TextBox
+                                BorderBrush="Silver"
+                                BorderThickness="0,1"
+                                IsReadOnly="True"
+                                Text="{Binding Path=SelectedLogItem.Throwable, Mode=OneWay}"
+                                TextWrapping="Wrap">
+                            </TextBox>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+
+        </DockPanel>
+    </Grid>
+
+</Window>

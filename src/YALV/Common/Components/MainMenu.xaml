@@ -1,0 +1,82 @@
+﻿<Menu
+    x:Class="YALV.Common.MainMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YALV.Common" xmlns:Properties="clr-namespace:YALV.Properties" mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    Background="Transparent"
+    Height="20"
+    BorderThickness="0,0,0,1"
+    BorderBrush="{StaticResource BorderColor}">
+    <MenuItem
+        Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_Header}">
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_OpenFile_Header}"
+            Command="{Binding Path=CommandOpenFile}"
+            CommandParameter="OPEN">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_AddFile_Header}"
+            Command="{Binding Path=CommandOpenFile}"
+            CommandParameter="ADD">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_SelectFolder_Header}"
+            Command="{Binding Path=CommandSelectFolder}">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_AddFolderPath_Header}"
+            Command="{Binding Path=CommandSaveFolder}">
+        </MenuItem>
+
+        <Separator />
+        
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_RecentFiles_Header}">
+            <local:RecentFileList
+                x:Name="RecentFileListMenu" />
+        </MenuItem>
+
+        <Separator />
+        
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_FileMenu_Exit_Header}"
+            Command="{Binding Path=CommandExit}"
+            InputGestureText="Alt+F4">
+        </MenuItem>
+    </MenuItem>
+    <MenuItem
+        Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_Header}">
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_OpenSelectedFolder_Header}"
+            Command="{Binding Path=CommandOpenSelectedFolder}">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_RefreshFileList_Header}"
+            Command="{Binding Path=CommandRefreshFiles}"
+            InputGestureText="Ctrl+F5">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_RefreshLog_Header}"
+            Command="{Binding Path=CommandRefresh}"
+            InputGestureText="F5">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_ClearFilters_Header}"
+            Command="{Binding Path=CommandClear}"
+            InputGestureText="Ctrl+D">
+        </MenuItem>
+        <MenuItem
+            Header="{x:Static Properties:Resources.Common_Components_MainMenu_ViewMenu_DeleteFile_Header}"
+            Command="{Binding Path=CommandDelete}"
+            InputGestureText="DEL">
+        </MenuItem>
+    </MenuItem>
+    <MenuItem
+        Header="{x:Static Properties:Resources.Common_Components_MainMenu_AboutMenu_Header}"
+        Command="{Binding Path=CommandAbout}">
+    </MenuItem>
+</Menu>

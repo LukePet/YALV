@@ -1,0 +1,129 @@
+﻿<ToolBar
+    x:Class="YALV.Common.MainToolbar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:Properties="clr-namespace:YALV.Properties"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+
+    <ToolBar.Resources>
+        <Style
+            TargetType="Image">
+            <Setter
+                Property="Width"
+                Value="40" />
+        </Style>
+        <Style
+            TargetType="TextBlock">
+            <Setter
+                Property="FontSize"
+                Value="10" />
+            <Setter
+                Property="TextAlignment"
+                Value="Center" />
+        </Style>
+        <Style
+            x:Key="ToolbarButtonStyle"
+            TargetType="{x:Type Button}">
+            <Setter
+                Property="Focusable"
+                Value="False" />
+            <Setter
+                Property="Margin"
+                Value="0,0,10,1" />
+        </Style>
+    </ToolBar.Resources>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_OpenFile_ToolTip}"
+        Command="{Binding Path=CommandOpenFile}"
+        CommandParameter="OPEN">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/open_file.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_OpenFile_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_AddFile_Tooltip}"
+        Command="{Binding Path=CommandOpenFile}"
+        CommandParameter="ADD">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/add_file.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_AddFile_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_SelectFolder_Tooltip}"
+        Command="{Binding Path=CommandSelectFolder}">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/select_folder.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_SelectFolder_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_AddFolderPath_Tooltip}"
+        Command="{Binding Path=CommandSaveFolder}">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/save_folder.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_AddFolderPath_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Separator
+        Margin="2,0,12,0" />
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_RefreshLog_Tooltip}"
+        Command="{Binding Path=CommandRefresh}">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/refresh.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_RefreshLog_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_ClearFilters_Tooltip}"
+        Command="{Binding Path=CommandClear}">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/clear.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_ClearFilters_Text}" />
+        </StackPanel>
+    </Button>
+
+    <Button
+        Style="{StaticResource ToolbarButtonStyle}"
+        Margin="0,0,0,1"
+        ToolTip="{x:Static Properties:Resources.Common_Components_MainToolbar_DeleteSelectedFile_Tooltip}"
+        Command="{Binding Path=CommandDelete}">
+        <StackPanel>
+            <Image
+                Source="/Resources/Icons/delete.png" />
+            <TextBlock
+                Text="{x:Static Properties:Resources.Common_Components_MainToolbar_DeleteSelectedFile_Text}" />
+        </StackPanel>
+    </Button>
+</ToolBar>

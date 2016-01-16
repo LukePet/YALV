@@ -1,0 +1,243 @@
+﻿<Window
+    x:Class="YALV.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Properties="clr-namespace:YALV.Properties"
+    Style="{StaticResource DefaultWindowStyle}"
+    Width="840"
+    SizeToContent="Height"
+    Title="{x:Static Properties:Resources.About_Title}"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="ToolWindow">
+
+    <DockPanel
+        Margin="10"
+        LastChildFill="True">
+
+        <!-- TITLE -->
+        <TextBlock
+            DockPanel.Dock="Top"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="{StaticResource DarkGradientBackground}"
+            Text="{x:Static Properties:Resources.About_Header_Text}"
+            TextAlignment="Center" />
+
+        <StackPanel
+            DockPanel.Dock="Bottom"
+            Margin="0,8,0,0">
+            <!-- CODEPLEX -->
+            <TextBlock
+                FontSize="13"
+                FontWeight="Bold"
+                TextAlignment="Center">
+                    <Hyperlink
+                    Foreground="Teal"
+                    NavigateUri="http://yalv.codeplex.com"
+                    RequestNavigate="Hyperlink_RequestNavigate"
+                    TargetName="_blank">
+                        YALV! Project on CodePlex
+                    </Hyperlink>
+            </TextBlock>
+
+            <!-- PERSONAL PAGE -->
+            <TextBlock
+                Margin="0,8,0,0"
+                FontWeight="DemiBold"
+                TextAlignment="Center">
+                    <Hyperlink
+                    Foreground="Teal"
+                    NavigateUri="http://www.linkedin.com/in/lucapetrini"
+                    RequestNavigate="Hyperlink_RequestNavigate"
+                    TargetName="_blank">
+                        An open source application developed by Luca Petrini
+                    </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+
+        <Grid
+            Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="360" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <DockPanel
+                Grid.Column="0"
+                LastChildFill="True">
+
+                <!-- CREDITS -->
+                <GroupBox
+                    DockPanel.Dock="Bottom"
+                    Margin="0,5,0,0"
+                    BorderThickness="1"
+                    Header="{x:Static Properties:Resources.About_CreditsGroupBox_Header}">
+                    <StackPanel
+                        Margin="5">
+
+                        <StackPanel.Resources>
+                            <Style
+                                TargetType="TextBlock">
+                                <Setter
+                                    Property="Margin"
+                                    Value="0,0,0,5" />
+                            </Style>
+                            <Style
+                                TargetType="Hyperlink">
+                                <Setter
+                                    Property="Foreground"
+                                    Value="Blue" />
+                                <Setter
+                                    Property="TargetName"
+                                    Value="_blank" />
+                                <EventSetter
+                                    Event="RequestNavigate"
+                                    Handler="Hyperlink_RequestNavigate" />
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock>
+                            Providers to Retrieve Log Data - 
+                            <Hyperlink
+                                NavigateUri="http://www.codeplex.com/site/users/view/D_Guidi">
+                                D_Guidi
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            Localization Support - 
+                            <Hyperlink
+                                NavigateUri="http://www.codeplex.com/site/users/view/dmitriy_konovalov">
+                                Dmitriy Konovalov
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            Russian and French Translations - 
+                            <Hyperlink
+                                NavigateUri="http://www.codeplex.com/site/users/view/dmitriy_konovalov">
+                                Dmitriy Konovalov
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            Japanese Translation - 
+                            <Hyperlink
+                                NavigateUri="http://www.codeplex.com/site/users/view/yasuhiroHARA">
+                                yasuhiroHARA
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            German Translation - 
+                            <Hyperlink
+                                NavigateUri="https://www.codeplex.com/site/users/view/FBoeddeker">
+                                FBoeddeker
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://www.webdesignerdepot.com">
+                                Primo Icon Set by Webdesigner Depot
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://gallery.expression.microsoft.com/en-us/BusyIndicator">
+                                Busy Indicator
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://www.codeproject.com/Articles/37366/Styling-A-ScrollViewer-Scrollbar-In-WPF">
+                                ScrollViewer Scrollbar Style
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://www.codeproject.com/Articles/23731/RecentFileList-a-WPF-MRU">
+                                Most Recently Used
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://www.codeproject.com/Articles/39244/Scroll-Synchronization">
+                                Scroll Synchronization
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock>
+                            <Hyperlink
+                                NavigateUri="http://www.codeproject.com/KB/WPF/WPF_NHibernate_Validator.aspx">
+                                INotifyPropertyChange Implementation
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- INFO -->
+                <GroupBox
+                    BorderThickness="1"
+                    Header="{x:Static Properties:Resources.About_AboutGroupBox_Header}">
+                    <StackPanel
+                        Margin="5">
+
+                        <!-- VERSION -->
+                        <TextBlock
+                            Margin="0,2,0,0"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Name="lblVersion" />
+
+                        <!-- COPYRIGHT -->
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Text="Copyright © Luca Petrini 2013" />
+
+                        <!-- ABOUT -->
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            TextAlignment="Left"
+                            TextWrapping="Wrap"
+                            Text="{x:Static Properties:Resources.About_Description}"/>
+                    </StackPanel>
+                </GroupBox>
+            </DockPanel>
+
+            <GroupBox
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Padding="5"
+                BorderThickness="1"
+                Header="{x:Static Properties:Resources.About_Log4NetConfigurationGroupbox_Header}">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,5,0,0"
+                        FontStyle="Italic"
+                        Text="{x:Static Properties:Resources.About_Log4NetConfigurationGroupbox_Sample1_Title}" />
+                    <TextBox
+                        Margin="0,3,0,0"
+                        Background="Transparent"
+                        FontSize="10"
+                        IsReadOnly="True"
+                        Name="tbConfig1" />
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontStyle="Italic"
+                        Text="{x:Static Properties:Resources.About_Log4NetConfigurationGroupbox_Sample2_Title}" />
+                    <TextBox
+                        Margin="0,3,0,0"
+                        Background="Transparent"
+                        FontSize="10"
+                        IsReadOnly="True"
+                        Name="tbConfig2" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+    </DockPanel>
+</Window>
