@@ -87,6 +87,12 @@ namespace YALV.ViewModel
             base.OnDispose();
         }
 
+        #region Costants
+
+        public const string NOTIFY_RefreshView = "RefreshView";
+
+        #endregion
+
         #region Commands
 
         /// <summary>
@@ -382,6 +388,11 @@ namespace YALV.ViewModel
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// RefreshUI Action
+        /// </summary>
+        public Action<string, object> RefreshUI { get; set; }
 
         /// <summary>
         /// RecentFileList Manager
@@ -1074,6 +1085,12 @@ namespace YALV.ViewModel
             myJumpList.Apply();
         }
 
+        private void raiseRefreshUI(string eventName, object parameter = null)
+        {
+            if (RefreshUI != null)
+                RefreshUI(eventName, parameter);
+        }
+
         #endregion
 
         #region BackgroundWorker Methods (bkLoader)
@@ -1213,6 +1230,7 @@ namespace YALV.ViewModel
                     view.Refresh();
                 updateFilteredCounters(view);
             }
+            raiseRefreshUI(NOTIFY_RefreshView);
         }
 
         private bool levelCheckFilter(object item)

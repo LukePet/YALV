@@ -33,19 +33,20 @@ namespace YALV
     {
         public MainWindow(string[] args)
         {
-            initCulture();
+            InitCulture();
 
             InitializeComponent();
 
             //Initialize and assign ViewModel
             MainWindowVM _vm = new MainWindowVM(this);
-            _vm.GridManager = new FilteredGridManager(dgItems, txtSearchPanel, delegate(object sender, KeyEventArgs e)
+            _vm.GridManager = new FilteredGridManager(dgItems, txtSearchPanel, delegate (object sender, KeyEventArgs e)
             {
                 if (e.OriginalSource is TextBox)
                     _vm.RefreshView();
             });
             _vm.InitDataGrid();
             _vm.RecentFileList = mainMenu.RecentFileList;
+            _vm.RefreshUI = OnRefreshUI;
             this.DataContext = _vm;
 
             //Assign events
@@ -76,13 +77,36 @@ namespace YALV
             }
         }
 
-        private void initCulture()
+        private void InitCulture()
         {
             try
             {
                 var culture = ConfigurationManager.AppSettings["Culture"];
                 if (!String.IsNullOrWhiteSpace(culture))
                     Properties.Resources.Culture = new CultureInfo(culture);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, String.Empty, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void OnRefreshUI(string eventName, object parameter)
+        {
+            try
+            {
+                switch (eventName)
+                {
+                    case MainWindowVM.NOTIFY_RefreshView:
+                        if (dgItems != null)
+                        {
+                            dgItems.UpdateLayout();
+                            dgItems.ScrollIntoView(dgItems.SelectedItem);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (Exception ex)
             {
