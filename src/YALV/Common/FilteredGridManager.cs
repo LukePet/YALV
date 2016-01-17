@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -92,13 +93,42 @@ namespace YALV.Common
                     }
                 }
             }
+
+            _dg.ColumnReordered += OnColumnReordered;
         }
 
         #endregion
 
         #region Private methods
 
-        public void RegisterControl<T>(FrameworkElement element, string controlName, T control)
+        private void OnColumnReordered(object sender, DataGridColumnEventArgs dataGridColumnEventArgs)
+        {
+            if (dataGridColumnEventArgs.Column == null || !(dataGridColumnEventArgs.Column is DataGridBoundColumn))
+                return;
+
+            Binding colBind = ((DataGridBoundColumn)dataGridColumnEventArgs.Column).Binding as Binding;
+            if (colBind == null || colBind.Path == null)
+                return;
+
+            string field = colBind.Path.Path;
+            if (String.IsNullOrWhiteSpace(field))
+                return;
+
+            int displayOrder = dataGridColumnEventArgs.Column.DisplayIndex;
+            string textBoxName = getTextBoxName(field);
+
+            TextBox textBox = (from tb in _txtSearchPanel.Children.OfType<TextBox>()
+                               where tb.Name == textBoxName
+                               select tb).FirstOrDefault<TextBox>();
+
+            if (textBox == null)
+                return;
+
+            _txtSearchPanel.Children.Remove(textBox);
+            _txtSearchPanel.Children.Insert(displayOrder, textBox);
+        }
+
+        private void RegisterControl<T>(FrameworkElement element, string controlName, T control)
         {
             if ((T)element.FindName(controlName) != null)
             {

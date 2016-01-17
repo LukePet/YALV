@@ -911,14 +911,15 @@
                     </Border>
 
                     <DataGrid
-                        Style="{StaticResource DefaultDataGridStyle}"
-                        Margin="0,1,0,0"
+						CanUserReorderColumns="True"
                         CellStyle="{StaticResource DefaultDataGridCellStyle}"
                         ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
                         IsSynchronizedWithCurrentItem="True"
+						Margin="0,1,0,0"
                         Name="dgItems"
+						RowStyle="{StaticResource LogItemDataGridRowStyle}"
                         SelectedItem="{Binding Path=SelectedLogItem}"
-                        RowStyle="{StaticResource LogItemDataGridRowStyle}">
+						Style="{StaticResource DefaultDataGridStyle}">
 
                         <DataGrid.ContextMenu>
                             <ContextMenu>
