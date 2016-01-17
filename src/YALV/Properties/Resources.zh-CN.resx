@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MainWindow_DetailsBox_ItemId_Text" xml:space="preserve">
+    <value>ID:</value>
+  </data>
+  <data name="MainWindow_SelectionTooltip" xml:space="preserve">
+    <value>已过滤的数量 / 总数量</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessMessage" xml:space="preserve">
+    <value>目录列表已保存!</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessTitle" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_AllFilesCaption" xml:space="preserve">
+    <value>所有文件</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_XmlFilesCaption" xml:space="preserve">
+    <value>Xml 文件</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Add_Log_File" xml:space="preserve">
+    <value>添加日志文件</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Open_Log_File" xml:space="preserve">
+    <value>打开日志文件</value>
+  </data>
+  <data name="MainWindowVM_commandSelectFolderExecute_Description" xml:space="preserve">
+    <value>选择日志目录</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmText" xml:space="preserve">
+    <value>是否确定要删除所有已选文件?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmTitle" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmText" xml:space="preserve">
+    <value>是否确定要删除所有已选文件?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmTitle" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessage_Text" xml:space="preserve">
+    <value>找不到文件夹!
+[{0}]</value>
+    <comment>0 - 文件夹路径</comment>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessageText_Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Text" xml:space="preserve">
+    <value>删除文件错误!
+[{0}]
+
+{1}</value>
+    <comment>0 - 日志文件路径, 1 - 异常消息</comment>
+  </data>
+  <data name="MainWindowVM_updateJumpList_CustomCategoryName" xml:space="preserve">
+    <value>最近</value>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Text" xml:space="preserve">
+    <value>无法读取的文件!
+
+{0}</value>
+    <comment>0 - 异常消息</comment>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Title" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFile_Header" xml:space="preserve">
+    <value>添加文件...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFolderPath_Header" xml:space="preserve">
+    <value>添加目录到收藏...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Header" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_OpenFile_Header" xml:space="preserve">
+    <value>打开文件...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_RecentFiles_Header" xml:space="preserve">
+    <value>最近的文件</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_SelectFolder_Header" xml:space="preserve">
+    <value>打开目录...</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_Header" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>在资源管理器中打开文件夹</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>刷新文件列表</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshLog_Header" xml:space="preserve">
+    <value>刷新日志</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_ClearFilters_Header" xml:space="preserve">
+    <value>清除过滤</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_DeleteFile_Header" xml:space="preserve">
+    <value>删除文件</value>
+  </data>
+  <data name="Common_Components_MainMenu_AboutMenu_Header" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_ToolTip" xml:space="preserve">
+    <value>打开文件...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_Text" xml:space="preserve">
+    <value>打开文件</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Tooltip" xml:space="preserve">
+    <value>添加文件...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Text" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Tooltip" xml:space="preserve">
+    <value>打开目录...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Text" xml:space="preserve">
+    <value>打开目录</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Tooltip" xml:space="preserve">
+    <value>添加目录到收藏...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Text" xml:space="preserve">
+    <value>添加目录</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Tooltip" xml:space="preserve">
+    <value>刷新日志</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Tooltip" xml:space="preserve">
+    <value>清除过滤</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Text" xml:space="preserve">
+    <value>清除过滤</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Tooltip" xml:space="preserve">
+    <value>删除所选文件</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Text" xml:space="preserve">
+    <value>删除文件</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Tooltip" xml:space="preserve">
+    <value>保存收藏夹</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Tooltip" xml:space="preserve">
+    <value>添加目录到收藏</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Text" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Tooltip" xml:space="preserve">
+    <value>从收藏夹移除选中目录</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Text" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_AddNewItem_Header" xml:space="preserve">
+    <value>添加目录到收藏</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Header" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_RemoveSelectedItem_Header" xml:space="preserve">
+    <value>从收藏夹移除目录</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_SaveList_Header" xml:space="preserve">
+    <value>保存收藏夹</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Logger_Text" xml:space="preserve">
+    <value>Logger:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Level_Text" xml:space="preserve">
+    <value>级别:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeStamp_Text" xml:space="preserve">
+    <value>时间戳:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeDiff_Text" xml:space="preserve">
+    <value>Δ [与上一条日志时间差]:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_MachineName_Text" xml:space="preserve">
+    <value>机器名:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_HostName_Text" xml:space="preserve">
+    <value>主机名:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_UserName_Text" xml:space="preserve">
+    <value>用户名:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Application_Text" xml:space="preserve">
+    <value>程序:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Thread_Text" xml:space="preserve">
+    <value>线程:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Message_Text" xml:space="preserve">
+    <value>消息:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Throwable_Text" xml:space="preserve">
+    <value>抛出:</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_Checkbox_Text" xml:space="preserve">
+    <value>自动刷新</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_DecreaseInterval_Tooltip" xml:space="preserve">
+    <value>减少间隔</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_RefreshInterval_Tooltip" xml:space="preserve">
+    <value>刷新间隔</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_IncreaseInterval_Tooltip" xml:space="preserve">
+    <value>增加间隔</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Class_Text" xml:space="preserve">
+    <value>类:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Method_Text" xml:space="preserve">
+    <value>方法:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_File_Text" xml:space="preserve">
+    <value>文件:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Line_Text" xml:space="preserve">
+    <value>行号:</value>
+  </data>
+  <data name="MainWindow_MergeFile_Tooltip" xml:space="preserve">
+    <value>选择要合并的文件</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_DeleteFile_Header" xml:space="preserve">
+    <value>删除文件</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>刷新文件列表</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>打开选中目录</value>
+  </data>
+  <data name="MainWindow_ShowHideGroupBox_Header" xml:space="preserve">
+    <value>显示/隐藏</value>
+  </data>
+  <data name="MainWindow_SelectionGroupBox_Header" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="SaveFolderPath_Title" xml:space="preserve">
+    <value>YALV! - 编辑收藏夹</value>
+  </data>
+  <data name="AddFolderPath_Grid_NameColumn_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="AddFolderPath_Grid_PathColumn_Name" xml:space="preserve">
+    <value>路径</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>YALV! - 关于</value>
+  </data>
+  <data name="About_Header_Text" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="About_AboutGroupBox_Header" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="About_CreditsGroupBox_Header" xml:space="preserve">
+    <value>鸣谢</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Header" xml:space="preserve">
+    <value>Log4Net 配置</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample1_Title" xml:space="preserve">
+    <value>示例 1:</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample2_Title" xml:space="preserve">
+    <value>示例 2:</value>
+  </data>
+  <data name="FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip" xml:space="preserve">
+    <value>过滤 {0}</value>
+  </data>
+  <data name="GlobalHelper_DISPLAY_DATETIME_FORMAT" xml:space="preserve">
+    <value>MMM d, HH:mm:ss.fff</value>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Text" xml:space="preserve">
+    <value>保存收藏夹文件错误!
+[{0}]
+
+{1}</value>
+    <comment>0 - 文件夹路径, 1 - 异常消息</comment>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Text" xml:space="preserve">
+    <value>读取收藏夹文件错误!
+[{0}]
+
+{1}</value>
+    <comment>0 - 目录列表文件路径, 1 - 异常消息</comment>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Text" xml:space="preserve">
+    <value>读取日志文件错误!
+[{0}]
+
+{1}</value>
+    <comment>0 - 日志文件路径, 1 - 异常消息</comment>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Positive_Text" xml:space="preserve">
+    <value>+{0} 秒</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_IdColumn_Header" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_TimeStampColumn_Header" xml:space="preserve">
+    <value>时间戳</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LevelColumn_Header" xml:space="preserve">
+    <value>级别</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MessageColumn_Header" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LoggerColumn_Header" xml:space="preserve">
+    <value>Logger</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MachineNameColumn_Header" xml:space="preserve">
+    <value>机器名</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_HostNameColumn_Header" xml:space="preserve">
+    <value>主机名</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_UserNameColumn_Header" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_AppColumn_Header" xml:space="preserve">
+    <value>程序</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ThreadColumn_Header" xml:space="preserve">
+    <value>线程</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ClassColumn_Header" xml:space="preserve">
+    <value>类</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MethodColumn_Header" xml:space="preserve">
+    <value>方法</value>
+  </data>
+  <data name="MainWindow_GridContextMenu_CopyToClipboard" xml:space="preserve">
+    <value>复制到剪贴板</value>
+  </data>
+  <data name="MainWindowVM_AutoRefreshIntervalLocalized_Format" xml:space="preserve">
+    <value>{0} 秒</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Negative_Text" xml:space="preserve">
+    <value>-{0} 秒</value>
+  </data>
+  <data name="MainWindow_FullDateTimeFormatWithMilliseconds" xml:space="preserve">
+    <value>yyyy年-MMMM-d日, dddd, HH:mm:ss.fff</value>
+  </data>
+  <data name="CircularProgressBar_CircularProgressBar_BusyText" xml:space="preserve">
+    <value>正在读取...</value>
+  </data>
+  <data name="About_Version_Text" xml:space="preserve">
+    <value>版本 {0}</value>
+    <comment>0 - 文件版本信息</comment>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>YALV! 是一款用于 Log4Net 的日志浏览器，可以同时比对多个日志文件。
+
+主要功能:
+- 日志文件合并
+- 动态过滤
+- 动态显示/隐藏日志级别
+- 保存收藏日志目录
+- 打开最近使用的文件
+- 列排序
+
+Log4Net 配置必须设为 XmlLayoutSchemaLog4j 布局；在您的应用程序配置文件中仅需少量几行就可以配置使用这种格式（参见右侧示例）。
+
+这是一款基于 .NET Framework 4.0，使用 C# 语言编写的 WPF 应用程序。</value>
+  </data>
+</root>
