@@ -51,6 +51,8 @@ namespace YALV
 
             //Assign events
             dgItems.SelectionChanged += dgItems_SelectionChanged;
+            txtItemId.KeyUp += txtItemId_KeyUp;
+
             this.Loaded += delegate
             {
                 if (args != null && args.Length > 0)
@@ -59,6 +61,7 @@ namespace YALV
             this.Closing += delegate
             {
                 dgItems.SelectionChanged -= dgItems_SelectionChanged;
+                txtItemId.KeyUp -= txtItemId_KeyUp;
                 _vm.Dispose();
             };
         }
@@ -68,13 +71,17 @@ namespace YALV
             get { return System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName); }
         }
 
+        private void txtItemId_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Enter || e.Key == Key.Return) && Keyboard.Modifiers == ModifierKeys.None)
+            {
+                OnRefreshUI(MainWindowVM.NOTIFY_ScrollIntoView);
+            }
+        }
+
         private void dgItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgItems.SelectedItem != null)
-            {
-                dgItems.UpdateLayout();
-                dgItems.ScrollIntoView(dgItems.SelectedItem);
-            }
+            OnRefreshUI(MainWindowVM.NOTIFY_ScrollIntoView);
         }
 
         private void InitCulture()
@@ -91,14 +98,14 @@ namespace YALV
             }
         }
 
-        private void OnRefreshUI(string eventName, object parameter)
+        private void OnRefreshUI(string eventName, object parameter = null)
         {
             try
             {
                 switch (eventName)
                 {
-                    case MainWindowVM.NOTIFY_RefreshView:
-                        if (dgItems != null)
+                    case MainWindowVM.NOTIFY_ScrollIntoView:
+                        if (dgItems != null && dgItems.SelectedItem != null)
                         {
                             dgItems.UpdateLayout();
                             dgItems.ScrollIntoView(dgItems.SelectedItem);

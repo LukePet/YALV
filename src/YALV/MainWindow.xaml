@@ -735,6 +735,7 @@
 >
                                 </TextBlock>
                                 <TextBox
+                                    Name="txtItemId"
                                     Margin="0,1"
                                     MinWidth="42"
                                     HorizontalAlignment="Left"

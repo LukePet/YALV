@@ -89,7 +89,7 @@ namespace YALV.ViewModel
 
         #region Costants
 
-        public const string NOTIFY_RefreshView = "RefreshView";
+        public const string NOTIFY_ScrollIntoView = "ScrollIntoView";
 
         #endregion
 
@@ -1230,7 +1230,7 @@ namespace YALV.ViewModel
                     view.Refresh();
                 updateFilteredCounters(view);
             }
-            raiseRefreshUI(NOTIFY_RefreshView);
+            raiseRefreshUI(NOTIFY_ScrollIntoView);
         }
 
         private bool levelCheckFilter(object item)
