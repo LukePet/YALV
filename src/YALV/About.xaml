@@ -134,6 +134,13 @@
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock>
+                            Chinese Translation - 
+                            <Hyperlink
+                                NavigateUri="https://www.codeplex.com/site/users/view/yangmijun">
+                                yangmijun
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
                             <Hyperlink
                                 NavigateUri="http://www.webdesignerdepot.com">
                                 Primo Icon Set by Webdesigner Depot
