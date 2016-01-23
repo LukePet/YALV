@@ -8,7 +8,8 @@
     Height="650"
     Width="1250"
     Title="{x:Static Properties:Resources.MainWindow_Title}"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    AllowDrop="True">
 
     <Window.Resources>
         <converters:BoolToOppositeVisibilityConverter

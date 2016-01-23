@@ -64,6 +64,15 @@ namespace YALV
                 txtItemId.KeyUp -= txtItemId_KeyUp;
                 _vm.Dispose();
             };
+            this.Drop += (object sender, DragEventArgs e) =>
+            {
+                if (e.Data != null)
+                {
+                    string[] pathList = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    bool add = e.KeyStates.HasFlag(DragDropKeyStates.ControlKey);
+                    _vm.LoadFileList(pathList, add);
+                }
+            };
         }
 
         public static System.Globalization.CultureInfo ResolvedCulture
