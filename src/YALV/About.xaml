@@ -141,6 +141,12 @@
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock>
+                            Greek Translation - 
+                            <Hyperlink NavigateUri="https://github.com/MichalisN">
+                                Michalis Nicolaides
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
                             <Hyperlink
                                 NavigateUri="http://www.webdesignerdepot.com">
                                 Primo Icon Set by Webdesigner Depot
