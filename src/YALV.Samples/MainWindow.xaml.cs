@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +26,24 @@ namespace YALV.Samples
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var generationButton = sender as Button;
+            if (generationButton == null)
+            {
+                return;
+            }
+
+            generationButton.IsEnabled = false;
+
+            Task generateTask = Task.Factory.StartNew(GenerateRandomLogs);
+
+            generateTask.ContinueWith(x =>
+            {
+                Dispatcher.Invoke(new Action(() => generationButton.IsEnabled = true));
+            });
+        }
+
+        private void GenerateRandomLogs()
         {
             Random r = new Random();
             for (int i = 0; i < 5000; i++)
