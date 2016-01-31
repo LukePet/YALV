@@ -25,17 +25,17 @@
         <StackPanel
             DockPanel.Dock="Bottom"
             Margin="0,8,0,0">
-            <!-- CODEPLEX -->
+            <!-- GITHUB -->
             <TextBlock
                 FontSize="13"
                 FontWeight="Bold"
                 TextAlignment="Center">
                     <Hyperlink
                     Foreground="Teal"
-                    NavigateUri="http://yalv.codeplex.com"
+                    NavigateUri="https://lukepet.github.io/yalv"
                     RequestNavigate="Hyperlink_RequestNavigate"
                     TargetName="_blank">
-                        YALV! Project on CodePlex
+                        YALV! Project on GitHub
                     </Hyperlink>
             </TextBlock>
 
