@@ -897,21 +897,36 @@ namespace YALV.ViewModel
 
             foreach (string path in pathList)
             {
-                string fileName = Path.GetFileName(path);
-                FileItem newItem = new FileItem(fileName, path);
-                newItem.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
-                {
-                    if (e.PropertyName.Equals(FileItem.PROP_Checked))
-                    {
-                        if (newItem.Checked)
-                            loadLogFile(newItem.Path, true);
-                        else
-                            removeItems(newItem.Path);
+                //Ignore path if is not valid
+                if (!File.Exists(path) && !Directory.Exists(path))
+                    continue;
 
-                        refreshCommandsCanExecute();
-                    }
-                };
-                FileList.Add(newItem);
+                //Get files list to add
+                string[] files = null;
+                FileAttributes attr = File.GetAttributes(path);
+                if (attr.HasFlag(FileAttributes.Directory))
+                    files = Directory.GetFiles(path);
+                else
+                    files = new string[] { path };
+
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    FileItem newItem = new FileItem(fileName, file);
+                    newItem.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+                    {
+                        if (e.PropertyName.Equals(FileItem.PROP_Checked))
+                        {
+                            if (newItem.Checked)
+                                loadLogFile(newItem.Path, true);
+                            else
+                                removeItems(newItem.Path);
+
+                            refreshCommandsCanExecute();
+                        }
+                    };
+                    FileList.Add(newItem);
+                }
             }
 
             _loadingFileList = false;
@@ -961,7 +976,7 @@ namespace YALV.ViewModel
             FileList.Clear();
             SelectedFolder = null;
             string path = Constants.FOLDERS_FILE_PATH;
-            IList<PathItem> folders=null;
+            IList<PathItem> folders = null;
             try
             {
                 folders = DataService.ParseFolderFile(path);
@@ -1108,15 +1123,15 @@ namespace YALV.ViewModel
             IList<LogItem> res = null;
             try
             {
-                 res= DataService.ParseLogFile(path);
+                res = DataService.ParseLogFile(path);
             }
             catch (Exception ex)
             {
                 string message = String.Format((string)Resources.GlobalHelper_ParseLogFile_Error_Text, path, ex.Message);
-                MessageBox.Show(message, Resources.GlobalHelper_ParseLogFile_Error_Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);                
-               res=new List<LogItem>();
+                MessageBox.Show(message, Resources.GlobalHelper_ParseLogFile_Error_Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                res = new List<LogItem>();
             }
-            
+
             //System.Threading.Thread.Sleep(200);
 
             BackgroundWorker worker = sender as BackgroundWorker;
