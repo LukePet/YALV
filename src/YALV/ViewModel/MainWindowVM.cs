@@ -59,6 +59,8 @@ namespace YALV.ViewModel
 
             AutoRefreshInterval = Constants.DEFAULT_REFRESH_INTERVAL;
             IsAutoRefreshEnabled = false;
+
+            refreshWindowTitle();
         }
 
         protected override void OnDispose()
@@ -395,6 +397,21 @@ namespace YALV.ViewModel
         public Action<string, object> RefreshUI { get; set; }
 
         /// <summary>
+        /// WindowTitle Property
+        /// </summary>
+        public string WindowTitle
+        {
+            get { return _windowTitle; }
+            set
+            {
+                _windowTitle = value;
+                RaisePropertyChanged(PROP_WindowTitle);
+            }
+        }
+        private string _windowTitle;
+        public static string PROP_WindowTitle = "WindowTitle";
+
+        /// <summary>
         /// RecentFileList Manager
         /// </summary>
         public RecentFileList RecentFileList
@@ -458,6 +475,7 @@ namespace YALV.ViewModel
                 }
 
                 refreshCommandsCanExecute();
+                refreshWindowTitle();
             }
         }
         private bool _isFileSelectionEnabled;
@@ -485,6 +503,7 @@ namespace YALV.ViewModel
                     }
 
                     refreshCommandsCanExecute();
+                    refreshWindowTitle();
                 }
             }
         }
@@ -590,6 +609,8 @@ namespace YALV.ViewModel
 
                 _goToLogItemId = _selectedLogItem != null ? _selectedLogItem.Id.ToString() : string.Empty;
                 RaisePropertyChanged(PROP_GoToLogItemId);
+
+                refreshWindowTitle();
             }
         }
         private LogItem _selectedLogItem;
@@ -1104,6 +1125,29 @@ namespace YALV.ViewModel
         {
             if (RefreshUI != null)
                 RefreshUI(eventName, parameter);
+        }
+
+        private void refreshWindowTitle()
+        {
+            string fileName = string.Empty;
+            if (IsFileSelectionEnabled && SelectedLogItem != null)
+            {
+                fileName = (from f in FileList
+                            where SelectedLogItem.Path.Equals(f.Path, StringComparison.OrdinalIgnoreCase)
+                            select f.FileName).FirstOrDefault<string>();
+            }
+
+            if (!IsFileSelectionEnabled && SelectedFile != null)
+                fileName = SelectedFile.FileName;
+
+            string title = string.Empty;
+            if (!String.IsNullOrWhiteSpace(fileName))
+                title = String.Format("{0} / {1}", Properties.Resources.MainWindow_Title, fileName);
+            else
+                title = Properties.Resources.MainWindow_Title;
+
+            if (!title.Equals(WindowTitle, StringComparison.OrdinalIgnoreCase))
+                WindowTitle = title;
         }
 
         #endregion
