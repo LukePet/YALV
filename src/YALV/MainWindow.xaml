@@ -28,6 +28,18 @@
         <ContextMenu
             x:Key="FilesListBoxContextMenu">
             <MenuItem
+                Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_SelectAll_Header}"
+                Command="{Binding Path=CommandSelectAllFiles}" 
+                CommandParameter="ALL"
+                Visibility="{Binding Path=IsFileSelectionEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+            <MenuItem
+                Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_SelectNone_Header}"
+                Command="{Binding Path=CommandSelectAllFiles}" 
+                CommandParameter="NONE"
+                Visibility="{Binding Path=IsFileSelectionEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+            <Separator 
+                Visibility="{Binding Path=IsFileSelectionEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+            <MenuItem
                 Header="{x:Static Properties:Resources.MainWindow_FilesListBoxContextMenu_DeleteFile_Header}"
                 Command="{Binding Path=CommandDelete}" />
             <MenuItem

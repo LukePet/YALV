@@ -516,4 +516,10 @@ Log4Net の設定ファイルは "XmlLayoutSchemaLog4j" レイアウトである
 
 .NET Framework 4.0 をベースとした、C# で書かれた WPF アプリケーションです。</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>すべてクリア</value>
+  </data>
 </root>

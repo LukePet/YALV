@@ -523,4 +523,10 @@ Il faut configurer Log4Net pour le faire utiliser l'agencement XmlLayoutSchemaLo
 
 C'est le logiciel WPF fondé sur .NET Framework 4.0 et écrite en C#.</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Sélectionner tout</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Tout effacer</value>
+  </data>
 </root>

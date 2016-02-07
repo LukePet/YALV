@@ -523,4 +523,10 @@
 
 Πρόκειται για μια εφαρμογή WPF που βασίζεται στο .NET Framework 4.0 και γραμμένο με γλώσσα C#.</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Επιλογή όλων</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Τα καθαρίζω όλα</value>
+  </data>
 </root>

@@ -523,4 +523,10 @@ Log4Net 配置必须设为 XmlLayoutSchemaLog4j 布局；在您的应用程序�
 
 这是一款基于 .NET Framework 4.0，使用 C# 语言编写的 WPF 应用程序。</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>全部清除</value>
+  </data>
 </root>

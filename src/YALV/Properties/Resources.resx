@@ -523,4 +523,10 @@ Log4Net config file must be setup with XmlLayoutSchemaLog4j layout; just need a 
 
 It is a WPF Application based on .NET Framework 4.0 and written with C# language.</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Select All Files</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Clear All Files</value>
+  </data>
 </root>

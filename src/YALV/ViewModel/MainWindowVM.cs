@@ -33,6 +33,7 @@ namespace YALV.ViewModel
             CommandClear = new CommandRelay(commandClearExecute, commandClearCanExecute);
             CommandDelete = new CommandRelay(commandDeleteExecute, commandDeleteCanExecute);
             CommandOpenSelectedFolder = new CommandRelay(commandOpenSelectedFolderExecute, commandOpenSelectedFolderCanExecute);
+            CommandSelectAllFiles = new CommandRelay(commandSelectAllFilesExecute, commandSelectAllFilesCanExecute);
             CommandIncreaseInterval = new CommandRelay(commandIncreaseIntervalExecute, p => true);
             CommandDecreaseInterval = new CommandRelay(commandDecreaseIntervalExecute, p => true);
             CommandAbout = new CommandRelay(commandAboutExecute, p => true);
@@ -141,6 +142,11 @@ namespace YALV.ViewModel
         /// OpenSelectedFolder Command
         /// </summary>
         public ICommandAncestor CommandOpenSelectedFolder { get; protected set; }
+
+        /// <summary>
+        /// SelectAllFiles Command
+        /// </summary>
+        public ICommandAncestor CommandSelectAllFiles { get; protected set; }
 
         /// <summary>
         /// About Command
@@ -378,6 +384,68 @@ namespace YALV.ViewModel
         protected virtual bool commandOpenSelectedFolderCanExecute(object parameter)
         {
             return SelectedFolder != null;
+        }
+
+        protected virtual object commandSelectAllFilesExecute(object parameter)
+        {
+            if (parameter == null)
+                return null;
+
+            if (IsFileSelectionEnabled)
+            {
+                try
+                {
+                    _loadingAllFiles = true;
+
+                    switch (parameter.ToString())
+                    {
+                        case "ALL":
+                            IList<string> files = new List<string>();
+                            foreach (FileItem item in FileList)
+                            {
+                                files.Add(item.Path);
+                                item.Checked = true;
+                            }
+
+                            if (bkLoader != null)
+                            {
+                                while (IsLoading)
+                                    GlobalHelper.DoEvents();
+
+                                IsLoading = true;
+
+                                object[] args = { files.ToArray<string>(), false };
+                                bkLoader.RunWorkerAsync(args);
+                            }
+                            break;
+
+                        case "NONE":
+                            foreach (FileItem item in FileList)
+                                item.Checked = false;
+
+                            Items.Clear();
+                            updateCounters();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Resources.GlobalHelper_ParseLogFile_Error_Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                finally
+                {
+                    _loadingAllFiles = false;
+                }
+            }
+            return null;
+        }
+
+        protected virtual bool commandSelectAllFilesCanExecute(object parameter)
+        {
+            return IsFileSelectionEnabled && FileList.Count > 0;
         }
 
         protected virtual object commandAboutExecute(object parameter)
@@ -936,7 +1004,7 @@ namespace YALV.ViewModel
                     FileItem newItem = new FileItem(fileName, file);
                     newItem.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
                     {
-                        if (e.PropertyName.Equals(FileItem.PROP_Checked))
+                        if (e.PropertyName.Equals(FileItem.PROP_Checked) && !_loadingAllFiles)
                         {
                             if (newItem.Checked)
                                 loadLogFile(newItem.Path, true);
@@ -972,6 +1040,8 @@ namespace YALV.ViewModel
         private IWinSimple _callingWin;
 
         private bool _loadingFileList = false;
+
+        private bool _loadingAllFiles = false;
 
         private void refreshCheckBoxBinding()
         {
@@ -1037,7 +1107,7 @@ namespace YALV.ViewModel
                 RecentFileList.InsertFile(path);
                 updateJumpList();
 
-                object[] args = { path, merge };
+                object[] args = { new string[] { path }, merge };
                 bkLoader.RunWorkerAsync(args);
             }
         }
@@ -1085,6 +1155,7 @@ namespace YALV.ViewModel
             CommandRefreshFiles.OnCanExecuteChanged();
             CommandDelete.OnCanExecuteChanged();
             CommandOpenSelectedFolder.OnCanExecuteChanged();
+            CommandSelectAllFiles.OnCanExecuteChanged();
         }
 
         private void updateJumpList()
@@ -1162,27 +1233,52 @@ namespace YALV.ViewModel
             if (args == null)
                 return;
 
-            string path = args[0] != null ? args[0].ToString() : string.Empty;
-            object merge = args[1];
-            IList<LogItem> res = null;
-            try
+            string[] pathList = args[0] as string[];
+            bool merge = (bool)args[1];
+            List<LogItem> res = new List<LogItem>();
+            int count = 0;
+
+            if (pathList != null)
             {
-                res = DataService.ParseLogFile(path);
-            }
-            catch (Exception ex)
-            {
-                string message = String.Format((string)Resources.GlobalHelper_ParseLogFile_Error_Text, path, ex.Message);
-                MessageBox.Show(message, Resources.GlobalHelper_ParseLogFile_Error_Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                res = new List<LogItem>();
+                foreach (string path in pathList)
+                {
+                    if (String.IsNullOrWhiteSpace(path))
+                        continue;
+
+                    try
+                    {
+                        var list = DataService.ParseLogFile(path);
+                        if (list != null)
+                        {
+                            res.AddRange(list);
+                            count++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = String.Format((string)Resources.GlobalHelper_ParseLogFile_Error_Text, path, ex.Message);
+                        MessageBox.Show(message, Resources.GlobalHelper_ParseLogFile_Error_Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+
+                    BackgroundWorker worker = sender as BackgroundWorker;
+                    if (worker != null && worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
             }
 
-            //System.Threading.Thread.Sleep(200);
-
-            BackgroundWorker worker = sender as BackgroundWorker;
-            if (worker != null && worker.CancellationPending)
+            //If loaded more than one list, then sort items by timestamp
+            if (count > 1)
             {
-                e.Cancel = true;
-                return;
+                res = (from it in res
+                       orderby it.TimeStamp ascending
+                       select it).ToList<LogItem>();
+
+                int itemId = 1;
+                foreach (LogItem item in res)
+                    item.Id = itemId++;
             }
 
             e.Result = new object[] { res, merge };
@@ -1200,16 +1296,14 @@ namespace YALV.ViewModel
                     IList<LogItem> list = res[0] as IList<LogItem>;
                     bool merge = (bool)res[1];
 
-                    if (merge)
+                    if (merge && Items.Count > 0)
                     {
+                        //Merge result list with existing items
                         IList<LogItem> mergeList = new List<LogItem>(Items);
                         int startId = mergeList.Count;
 
-                        if (list != null)
-                        {
-                            foreach (LogItem item in list)
-                                mergeList.Add(item);
-                        }
+                        foreach (LogItem item in list)
+                            mergeList.Add(item);
 
                         mergeList = (from it in mergeList
                                      orderby it.TimeStamp ascending
@@ -1219,15 +1313,11 @@ namespace YALV.ViewModel
                         foreach (LogItem item in mergeList)
                             item.Id = itemId++;
 
-                        Items.Clear();
-                        Items = new ObservableCollection<LogItem>(mergeList);
+                        list = mergeList;
                     }
-                    else
-                    {
-                        Items.Clear();
-                        if (list != null)
-                            Items = new ObservableCollection<LogItem>(list);
-                    }
+
+                    Items.Clear();
+                    Items = new ObservableCollection<LogItem>(list);
 
                     updateCounters();
 

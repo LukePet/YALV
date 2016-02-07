@@ -523,4 +523,10 @@ Log4Net должен быть сконфигурирован с шаблоном
     <value>Версия {0}</value>
     <comment>0 - FileVersionInfo</comment>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Выбрать все</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Очистить все</value>
+  </data>
 </root>

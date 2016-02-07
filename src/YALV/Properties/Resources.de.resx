@@ -523,4 +523,10 @@ Die Konfiguration von Log4Net muss das Layout "XmlLayoutSchemaLog4j" enthalten. 
 
 Diese Anwendung basiert auf das .NET Framework 4.0 mit WPF unter Verwendung ver Programmiersprache C#.</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Alles Auswählen</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Alles Löschen</value>
+  </data>
 </root>

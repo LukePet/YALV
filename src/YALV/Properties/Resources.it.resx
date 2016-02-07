@@ -523,4 +523,10 @@ Il file di configurazione di Log4Net deve essere impostato con il layout XmlLayo
 
 Si tratta di un'applicazione WPF basata sul .NET Framework 4.0 e scritta con il linguaggio C#.</value>
   </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Seleziona Tutti I Files</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Deseleziona Tutti I Files</value>
+  </data>
 </root>
