@@ -79,7 +79,7 @@ namespace YALV.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to YALV! is a log viewer for Log4Net that allow to compare multiple logs file simultaneously.
+        ///   Looks up a localized string similar to YALV! is a log viewer for Log4Net that allows to compare multiple log files simultaneously.
         ///
         ///MAIN FEATURES:
         ///- Log files merging
@@ -91,7 +91,7 @@ namespace YALV.Properties {
         ///
         ///Log4Net config file must be setup with XmlLayoutSchemaLog4j layout; just need a few lines in your application config file to configure it to use this format (see examples on right).
         ///
-        ///It is a WPF Application based on .NET Framework 4.0 and writt [rest of string was truncated]&quot;;.
+        ///It is a WPF Application based on .NET Framework 4.0 and writ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string About_Description {
             get {

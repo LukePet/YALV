@@ -32,7 +32,7 @@
                 TextAlignment="Center">
                     <Hyperlink
                     Foreground="Teal"
-                    NavigateUri="https://lukepet.github.io/yalv"
+                    NavigateUri="https://lukepet.github.io/YALV"
                     RequestNavigate="Hyperlink_RequestNavigate"
                     TargetName="_blank">
                         YALV! Project on GitHub
