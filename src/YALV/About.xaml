@@ -46,7 +46,7 @@
                 TextAlignment="Center">
                     <Hyperlink
                     Foreground="Teal"
-                    NavigateUri="http://www.linkedin.com/in/lucapetrini"
+                    NavigateUri="https://about.me/lukepet"
                     RequestNavigate="Hyperlink_RequestNavigate"
                     TargetName="_blank">
                         An open source application developed by Luca Petrini
