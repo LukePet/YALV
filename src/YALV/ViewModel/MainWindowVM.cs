@@ -47,8 +47,8 @@ namespace YALV.ViewModel
             IsLoading = false;
 
             _selectAll = true;
-            _selectDebug = _selectInfo = _selectWarn = _selectError = _selectFatal = false;
-            _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
+            _selectTrace = _selectDebug = _selectInfo = _selectWarn = _selectError = _selectFatal = false;
+            _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
 
             bkLoader = new BackgroundWorker();
             bkLoader.WorkerSupportsCancellation = true;
@@ -685,6 +685,26 @@ namespace YALV.ViewModel
         public static string PROP_SelectedLogItem = "SelectedLogItem";
 
         /// <summary>
+        /// ShowLevelTrace Property
+        /// </summary>
+        public bool ShowLevelTrace
+        {
+            get { return _showLevelTrace; }
+            set
+            {
+                if (value != _showLevelTrace)
+                {
+                    _showLevelTrace = value;
+                    RaisePropertyChanged(PROP_ShowLevelTrace);
+                    resetLevelSelection();
+                    RefreshView();
+                }
+            }
+        }
+        private bool _showLevelTrace;
+        public static string PROP_ShowLevelTrace = "ShowLevelTrace";
+
+        /// <summary>
         /// ShowLevelDebug Property
         /// </summary>
         public bool ShowLevelDebug
@@ -799,7 +819,7 @@ namespace YALV.ViewModel
 
                     if (_selectAll)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
                         refreshCheckBoxBinding();
                         RefreshView();
                     }
@@ -808,6 +828,32 @@ namespace YALV.ViewModel
         }
         private bool _selectAll;
         public static string PROP_SelectAll = "SelectAll";
+
+        /// <summary>
+        /// SelectTrace Property
+        /// </summary>
+        public bool SelectTrace
+        {
+            get { return _selectTrace; }
+            set
+            {
+                if (value != _selectTrace)
+                {
+                    _selectTrace = value;
+                    RaisePropertyChanged(PROP_SelectTrace);
+
+                    if (_selectTrace)
+                    {
+                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = true;
+                        refreshCheckBoxBinding();
+                        RefreshView();
+                    }
+                }
+            }
+        }
+        private bool _selectTrace;
+        public static string PROP_SelectTrace = "SelectTrace";
 
         /// <summary>
         /// SelectDebug Property
@@ -824,7 +870,7 @@ namespace YALV.ViewModel
 
                     if (_selectDebug)
                     {
-                        _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
                         _showLevelDebug = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -850,7 +896,7 @@ namespace YALV.ViewModel
 
                     if (_selectInfo)
                     {
-                        _showLevelDebug = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelWarn = _showLevelError = _showLevelFatal = false;
                         _showLevelInfo = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -876,7 +922,7 @@ namespace YALV.ViewModel
 
                     if (_selectWarn)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelError = _showLevelFatal = false;
                         _showLevelWarn = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -902,7 +948,7 @@ namespace YALV.ViewModel
 
                     if (_selectError)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelFatal = false;
                         _showLevelError = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -928,7 +974,7 @@ namespace YALV.ViewModel
 
                     if (_selectFatal)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = false;
                         _showLevelFatal = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -1045,6 +1091,7 @@ namespace YALV.ViewModel
 
         private void refreshCheckBoxBinding()
         {
+            RaisePropertyChanged(PROP_ShowLevelTrace);
             RaisePropertyChanged(PROP_ShowLevelDebug);
             RaisePropertyChanged(PROP_ShowLevelInfo);
             RaisePropertyChanged(PROP_ShowLevelWarn);
@@ -1055,6 +1102,7 @@ namespace YALV.ViewModel
         private void resetLevelSelection()
         {
             SelectAll = false;
+            SelectTrace = false;
             SelectDebug = false;
             SelectInfo = false;
             SelectWarn = false;
@@ -1389,6 +1437,8 @@ namespace YALV.ViewModel
             {
                 switch (logItem.LevelIndex)
                 {
+                    case LevelIndex.TRACE:
+                        return ShowLevelTrace;
                     case LevelIndex.DEBUG:
                         return ShowLevelDebug;
                     case LevelIndex.INFO:
@@ -1407,6 +1457,21 @@ namespace YALV.ViewModel
         #endregion
 
         #region Counters
+
+        /// <summary>
+        /// ItemsTraceCount Property
+        /// </summary>
+        public int ItemsTraceCount
+        {
+            get { return _itemsTraceCount; }
+            set
+            {
+                _itemsTraceCount = value;
+                RaisePropertyChanged(PROP_ItemsTraceCount);
+            }
+        }
+        private int _itemsTraceCount;
+        public static string PROP_ItemsTraceCount = "ItemsTraceCount";
 
         /// <summary>
         /// ItemsDebugCount Property
@@ -1482,6 +1547,21 @@ namespace YALV.ViewModel
         }
         private int _itemsFatalCount;
         public static string PROP_ItemsFatalCount = "ItemsFatalCount";
+
+        /// <summary>
+        /// ItemsTraceFilterCount Property
+        /// </summary>
+        public int ItemsTraceFilterCount
+        {
+            get { return _itemsTraceFilterCount; }
+            set
+            {
+                _itemsTraceFilterCount = value;
+                RaisePropertyChanged(PROP_ItemsTraceFilterCount);
+            }
+        }
+        private int _itemsTraceFilterCount;
+        public static string PROP_ItemsTraceFilterCount = "ItemsTraceFilterCount";
 
         /// <summary>
         /// ItemsDebugFilterCount Property
@@ -1579,6 +1659,10 @@ namespace YALV.ViewModel
                                where it.Level.Equals("DEBUG", StringComparison.OrdinalIgnoreCase)
                                select it).Count();
 
+            ItemsTraceCount = (from it in Items
+                               where it.Level.Equals("TRACE", StringComparison.OrdinalIgnoreCase)
+                               select it).Count();
+
             ItemsInfoCount = (from it in Items
                               where it.Level.Equals("INFO", StringComparison.OrdinalIgnoreCase)
                               select it).Count();
@@ -1607,6 +1691,10 @@ namespace YALV.ViewModel
                 {
                     ItemsFilterCount = fltList.Count();
 
+                    ItemsTraceFilterCount = (from it in fltList
+                                             where it.Level.Equals("TRACE", StringComparison.OrdinalIgnoreCase)
+                                             select it).Count();
+
                     ItemsDebugFilterCount = (from it in fltList
                                              where it.Level.Equals("DEBUG", StringComparison.OrdinalIgnoreCase)
                                              select it).Count();
@@ -1631,6 +1719,7 @@ namespace YALV.ViewModel
             else
             {
                 ItemsFilterCount = 0;
+                ItemsTraceFilterCount = 0;
                 ItemsDebugFilterCount = 0;
                 ItemsInfoFilterCount = 0;
                 ItemsWarnFilterCount = 0;
