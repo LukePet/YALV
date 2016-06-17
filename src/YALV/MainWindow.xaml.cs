@@ -19,6 +19,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using YALV.Common;
 using YALV.Common.Interfaces;
@@ -48,6 +49,9 @@ namespace YALV
             _vm.RecentFileList = mainMenu.RecentFileList;
             _vm.RefreshUI = OnRefreshUI;
             this.DataContext = _vm;
+
+	        dgItems.EnableColumnVirtualization = true;
+	        dgItems.EnableRowVirtualization = true;
 
             //Assign events
             dgItems.SelectionChanged += dgItems_SelectionChanged;
@@ -111,13 +115,14 @@ namespace YALV
         {
             try
             {
+				
                 switch (eventName)
                 {
                     case MainWindowVM.NOTIFY_ScrollIntoView:
                         if (dgItems != null && dgItems.SelectedItem != null)
                         {
-                            dgItems.UpdateLayout();
-                            dgItems.ScrollIntoView(dgItems.SelectedItem);
+                            //dgItems.UpdateLayout();
+                            //dgItems.ScrollIntoView(dgItems.SelectedItem);
                         }
                         break;
                     default:

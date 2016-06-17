@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
+using System.Windows.Forms;
 using YALV.Common.Converters;
 using YALV.Core.Domain;
 using YALV.Properties;
+using Application = System.Windows.Application;
+using Binding = System.Windows.Data.Binding;
+using DataGrid = System.Windows.Controls.DataGrid;
+using KeyEventHandler = System.Windows.Input.KeyEventHandler;
+using Panel = System.Windows.Controls.Panel;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace YALV.Common
 {
@@ -31,7 +38,7 @@ namespace YALV.Common
 
         #region Public Methods
 
-        public void BuildDataGrid(IList<ColumnItem> columns)
+        public void BuildDataGrid(IList<ColumnItem> columns, List<ColumnItem> newColumns = null)
         {
             if (_dg == null)
                 return;
@@ -43,10 +50,12 @@ namespace YALV.Common
 
             if (columns != null)
             {
+				_dg.Columns.Clear();
                 foreach (ColumnItem item in columns)
                 {
                     DataGridTextColumn col = new DataGridTextColumn();
-                    col.Header = item.Header;
+
+					col.Header = item.Header;
                     if (item.Alignment == CellAlignment.CENTER && _centerCellStyle != null)
                         col.CellStyle = _centerCellStyle;
                     if (item.MinWidth != null)
@@ -54,8 +63,24 @@ namespace YALV.Common
                     if (item.Width != null)
                         col.Width = item.Width.Value;
 
-                    Binding bind = new Binding(item.Field) { Mode = BindingMode.OneWay };
-                    bind.ConverterCulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName);
+	                Binding bind;
+	                if (newColumns != null && newColumns.Count > 0)
+	                {
+		                if (newColumns.Contains(item))
+		                {
+			                bind = new Binding(string.Format("CustomFields[{0}]", item.Field)) {Mode = BindingMode.OneWay};
+		                }
+		                else
+		                {
+							bind = new Binding(item.Field) { Mode = BindingMode.OneWay };
+						}
+					}
+	                else
+	                {
+						bind = new Binding(item.Field) { Mode = BindingMode.OneWay };
+					}
+
+					bind.ConverterCulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName);
                     if (!String.IsNullOrWhiteSpace(item.StringFormat))
                         bind.StringFormat = item.StringFormat;
                     col.Binding = bind;

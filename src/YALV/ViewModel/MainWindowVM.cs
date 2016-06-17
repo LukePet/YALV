@@ -1329,6 +1329,9 @@ namespace YALV.ViewModel
 
                         SelectedLogItem = lastItem != null ? lastItem : Items[Items.Count - 1];
                     }
+
+	                var logItem = (List<LogItem>)((object[])e.Result)[0];
+					ReInitDataGridWithNewColumns(logItem[0].CustomFields);
                 }
             }
             IsLoading = false;
@@ -1345,31 +1348,58 @@ namespace YALV.ViewModel
 
         public void InitDataGrid()
         {
+	        return;
             if (GridManager != null)
             {
-                IList<ColumnItem> dgColumns = new List<ColumnItem>()
-                {
-                    new ColumnItem("Id", 37, null, CellAlignment.CENTER,string.Empty){Header = Resources.MainWindowVM_InitDataGrid_IdColumn_Header},
-                    new ColumnItem("TimeStamp", 120, null, CellAlignment.CENTER, GlobalHelper.DisplayDateTimeFormat){Header = Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header},
-                    new ColumnItem("Level", null, 50, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_LevelColumn_Header},
-                    new ColumnItem("Message", null, 300){Header = Resources.MainWindowVM_InitDataGrid_MessageColumn_Header},
-                    new ColumnItem("Logger", 150, null){Header = Resources.MainWindowVM_InitDataGrid_LoggerColumn_Header},
-                    new ColumnItem("MachineName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_MachineNameColumn_Header},
-                    new ColumnItem("HostName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_HostNameColumn_Header},
-                    new ColumnItem("UserName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_UserNameColumn_Header},
-                    new ColumnItem("App", 150, null){Header = Resources.MainWindowVM_InitDataGrid_AppColumn_Header},
-                    new ColumnItem("Thread", 44, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_ThreadColumn_Header},
-                    new ColumnItem("Class", null, 300){Header = Resources.MainWindowVM_InitDataGrid_ClassColumn_Header},
-                    new ColumnItem("Method", 200, null){Header = Resources.MainWindowVM_InitDataGrid_MethodColumn_Header}
-                    //new ColumnItem("Delta", 60, null, CellAlignment.CENTER, null, "Δ"),
-                    //new ColumnItem("Path", 50)
-                };
+	            IList<ColumnItem> dgColumns = GetDefaultColumns();
                 GridManager.BuildDataGrid(dgColumns);
                 GridManager.AssignSource(new Binding(MainWindowVM.PROP_Items) { Source = this, Mode = BindingMode.OneWay });
                 GridManager.OnBeforeCheckFilter = levelCheckFilter;
             }
         }
 
+	    private List<ColumnItem> GetDefaultColumns()
+		{
+			return new List<ColumnItem>()
+				{
+					new ColumnItem("Id", 37, null, CellAlignment.CENTER,string.Empty){Header = Resources.MainWindowVM_InitDataGrid_IdColumn_Header},
+					new ColumnItem("TimeStamp", 120, null, CellAlignment.CENTER, GlobalHelper.DisplayDateTimeFormat){Header = Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header},
+					new ColumnItem("Level", null, 50, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_LevelColumn_Header},
+					new ColumnItem("Message", null, 300){Header = Resources.MainWindowVM_InitDataGrid_MessageColumn_Header},
+					new ColumnItem("Logger", 150, null){Header = Resources.MainWindowVM_InitDataGrid_LoggerColumn_Header},
+					new ColumnItem("MachineName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_MachineNameColumn_Header},
+					new ColumnItem("HostName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_HostNameColumn_Header},
+					new ColumnItem("UserName", 110, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_UserNameColumn_Header},
+					new ColumnItem("App", 150, null){Header = Resources.MainWindowVM_InitDataGrid_AppColumn_Header},
+					new ColumnItem("Thread", 44, null, CellAlignment.CENTER){Header = Resources.MainWindowVM_InitDataGrid_ThreadColumn_Header},
+					new ColumnItem("Class", null, 300){Header = Resources.MainWindowVM_InitDataGrid_ClassColumn_Header},
+					new ColumnItem("Method", 200, null){Header = Resources.MainWindowVM_InitDataGrid_MethodColumn_Header}
+                };
+		}
+
+
+		public void ReInitDataGridWithNewColumns(Dictionary<string, string> customFields)
+        {
+            if (GridManager != null)
+            {
+	            var dgColumns = GetDefaultColumns();
+
+	            var newColumns = new List<ColumnItem>();
+	            foreach (var field in customFields)
+				{
+					var column = new ColumnItem(field.Key, null, 200)
+					{
+						Header = field.Key
+					};
+					newColumns.Add(column);
+					dgColumns.Add(column);
+				}
+
+				GridManager.BuildDataGrid(dgColumns, newColumns);
+                GridManager.AssignSource(new Binding(MainWindowVM.PROP_Items) { Source = this, Mode = BindingMode.OneWay });
+                GridManager.OnBeforeCheckFilter = levelCheckFilter;
+            }
+        }
         public void RefreshView()
         {
             if (GridManager != null)
