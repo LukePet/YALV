@@ -121,8 +121,8 @@ namespace YALV
                     case MainWindowVM.NOTIFY_ScrollIntoView:
                         if (dgItems != null && dgItems.SelectedItem != null)
                         {
-                            //dgItems.UpdateLayout();
-                            //dgItems.ScrollIntoView(dgItems.SelectedItem);
+                            dgItems.UpdateLayout();
+                            dgItems.ScrollIntoView(dgItems.SelectedItem);
                         }
                         break;
                     default:
