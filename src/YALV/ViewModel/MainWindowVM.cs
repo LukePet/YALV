@@ -1330,8 +1330,12 @@ namespace YALV.ViewModel
                         SelectedLogItem = lastItem != null ? lastItem : Items[Items.Count - 1];
                     }
 
-	                var logItem = (List<LogItem>)((object[])e.Result)[0];
-					ReInitDataGridWithNewColumns(logItem[0].CustomFields);
+	                var result = (List<LogItem>)((object[])e.Result)[0];
+	                var maxCustomFields = result.Max(c => c.CustomFields.Count);
+
+	                var logItem = result.First(r => r.CustomFields.Count == maxCustomFields);
+					
+					ReInitDataGridWithNewColumns(logItem.CustomFields);
                 }
             }
             IsLoading = false;
@@ -1348,7 +1352,6 @@ namespace YALV.ViewModel
 
         public void InitDataGrid()
         {
-	        return;
             if (GridManager != null)
             {
 	            IList<ColumnItem> dgColumns = GetDefaultColumns();

@@ -103,13 +103,13 @@ namespace YALV.Common
                         Style txtStyle = Application.Current.FindResource("RoundWatermarkTextBox") as Style;
                         if (txtStyle != null)
                             txt.Style = txtStyle;
-                        txt.Name = getTextBoxName(item.Field);
+                        txt.Name = getTextBoxName(item.Field.Replace(" ", ""));
                         txt.ToolTip = String.Format(Resources.FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip, item.Header);
                         txt.Tag = txt.ToolTip.ToString().ToLower();
                         txt.Text = string.Empty;
                         txt.AcceptsReturn = false;
                         txt.SetBinding(TextBox.WidthProperty, widthBind);
-                        _filterPropertyList.Add(item.Field);
+                        _filterPropertyList.Add(item.Field.Replace(" ",""));
                         if (_keyUpEvent != null)
                             txt.KeyUp += _keyUpEvent;
 
