@@ -51,6 +51,7 @@ namespace YALV.Common
             if (columns != null)
             {
 				_dg.Columns.Clear();
+				_txtSearchPanel.Children.Clear();
                 foreach (ColumnItem item in columns)
                 {
                     DataGridTextColumn col = new DataGridTextColumn();

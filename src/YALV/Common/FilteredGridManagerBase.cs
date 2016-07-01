@@ -202,8 +202,18 @@ namespace YALV.Common
             }
             catch
             {
-                val = null;
-            }
+	            try
+	            {
+		            var custom = item.GetType().GetProperty("CustomFields");
+					var inf = custom.GetValue(item, null);
+
+		            val = ((Dictionary<string, string>) inf)[prop];
+	            }
+				catch 
+	            {
+					val = null;
+				}
+			}
             return val;
         }
 
