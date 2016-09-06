@@ -20,7 +20,7 @@ D-YALV is a fork of YALV! that supports custom columns & data. During your appli
     <log4j:data name="executionId" value="7FF2DFF98DA8314C8CF428A46FBE4555" />
 
   </log4j:properties>
-<log4j:locationInfo class="PISON.NetworkSnapshot.Service.Preparation.CellPmLoader+&lt;LoadKpis&gt;d__2" method="MoveNext" file="C:\BuildAgent\work\d6ca94c1f82fb28a\PISON.NetworkSnapshot.Service\Preparation\CellPmLoader.cs" line="43" />
+<log4j:locationInfo class="..." method="MoveNext" file="..." line="43" />
 </log4j:event>
 ```
 
