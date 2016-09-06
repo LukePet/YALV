@@ -16,8 +16,8 @@ D-YALV is a fork of YALV! that supports custom columns & data. During your appli
     <log4j:data name="log4net:HostName" value="system" />
     
     <!-- Custom columns, added by you -->
-    <log4j:data name="executionPlanId" value="410" />
-    <log4j:data name="executionId" value="7FF2DFF98DA8314C8CF428A46FBE4555" />
+    <log4j:data name="userId" value="410" />
+    <log4j:data name="locationGuid" value="7FF2DFF98DA8314C8CF428A46FBE4555" />
 
   </log4j:properties>
 <log4j:locationInfo class="..." method="MoveNext" file="..." line="43" />
