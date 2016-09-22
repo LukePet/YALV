@@ -1,213 +1,281 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using YALV.Core;
 using YALV.Core.Domain;
 
 namespace YALV.Common
 {
-    public class FilteredGridManagerBase
-        : DisposableObject
-    {
-        public FilteredGridManagerBase(DataGrid dg, Panel txtSearchPanel, KeyEventHandler keyUpEvent)
+	public class FilteredGridManagerBase
+		: DisposableObject
+	{
+		public FilteredGridManagerBase(DataGrid dg, Panel txtSearchPanel, KeyEventHandler keyUpEvent)
+		{
+			Dg = dg;
+			TxtSearchPanel = txtSearchPanel;
+			KeyUpEvent = keyUpEvent;
+			FilterPropertyList = new List<string>();
+			TxtCache = new Hashtable();
+			IsFilteringEnabled = true;
+		}
+
+		protected override void OnDispose()
+		{
+			ClearCache();
+			FilterPropertyList?.Clear();
+			Dg?.Columns.Clear();
+			if (Cvs != null)
+			{
+				if (Cvs.View != null)
+					Cvs.View.Filter = null;
+				BindingOperations.ClearAllBindings(Cvs);
+			}
+			base.OnDispose();
+		}
+
+		#region Private Properties
+
+		protected IList<string> FilterPropertyList;
+		protected DataGrid Dg;
+		protected Panel TxtSearchPanel;
+		protected KeyEventHandler KeyUpEvent;
+		protected CollectionViewSource Cvs;
+		protected Hashtable TxtCache;
+
+	    private bool _goodregex;
+	    private Timer _timer;
+
+		#endregion
+
+		#region Public Methods
+
+		public virtual void AssignSource(Binding sourceBind)
+		{
+			if (Cvs == null)
+				Cvs = new CollectionViewSource();
+			else
+				BindingOperations.ClearBinding(Cvs, CollectionViewSource.SourceProperty);
+
+			BindingOperations.SetBinding(Cvs, CollectionViewSource.SourceProperty, sourceBind);
+			BindingOperations.ClearBinding(Dg, ItemsControl.ItemsSourceProperty);
+			Binding bind = new Binding() { Source = Cvs, Mode = BindingMode.OneWay };
+			Dg.SetBinding(ItemsControl.ItemsSourceProperty, bind);
+		}
+
+	    private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _dg = dg;
-            _txtSearchPanel = txtSearchPanel;
-            _keyUpEvent = keyUpEvent;
-            _filterPropertyList = new List<string>();
-            _txtCache = new Hashtable();
-            IsFilteringEnabled = true;
-        }
-
-        protected override void OnDispose()
-        {
-            ClearCache();
-            if (_filterPropertyList != null)
-                _filterPropertyList.Clear();
-            if (_dg != null)
-                _dg.Columns.Clear();
-            if (_cvs != null)
-            {
-                if (_cvs.View != null)
-                    _cvs.View.Filter = null;
-                BindingOperations.ClearAllBindings(_cvs);
-            }
-            base.OnDispose();
-        }
-
-        #region Private Properties
-
-        protected IList<string> _filterPropertyList;
-        protected DataGrid _dg;
-        protected Panel _txtSearchPanel;
-        protected KeyEventHandler _keyUpEvent;
-        protected CollectionViewSource _cvs;
-        protected Hashtable _txtCache;
-
-        #endregion
-
-        #region Public Methods
-
-        public virtual void AssignSource(Binding sourceBind)
-        {
-            if (_cvs == null)
-                _cvs = new CollectionViewSource();
-            else
-                BindingOperations.ClearBinding(_cvs, CollectionViewSource.SourceProperty);
-
-            BindingOperations.SetBinding(_cvs, CollectionViewSource.SourceProperty, sourceBind);
-            BindingOperations.ClearBinding(_dg, DataGrid.ItemsSourceProperty);
-            Binding bind = new Binding() { Source = _cvs, Mode = BindingMode.OneWay };
-            _dg.SetBinding(DataGrid.ItemsSourceProperty, bind);
+            _goodregex = false;
         }
 
         public ICollectionView GetCollectionView()
         {
-            if (_cvs != null)
-            {
-                //Assign filter method
-                if (_cvs.View != null && _cvs.View.Filter == null)
-                {
-                    IsFilteringEnabled = false;
-                    _cvs.View.Filter = itemCheckFilter;
-                    IsFilteringEnabled = true;
-                }
-                return _cvs.View;
-            }
-            return null;
-        }
+            // Don't allow search to run more than 3 seconds
+            _timer = new Timer(3000);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Enabled = true;
 
-        public void ResetSearchTextBox()
-        {
-            if (_filterPropertyList != null && _txtSearchPanel != null)
-            {
-                //Clear all textbox text
-                foreach (string prop in _filterPropertyList)
-                {
-                    TextBox txt = _txtSearchPanel.FindName(getTextBoxName(prop)) as TextBox;
-                    if (txt != null & !string.IsNullOrEmpty(txt.Text))
-                        txt.Text = string.Empty;
-                }
-            }
-        }
+			if (Cvs != null)
+			{
+				//Assign filter method
+				if (Cvs.View != null && Cvs.View.Filter == null)
+				{
+					IsFilteringEnabled = false;
+					Cvs.View.Filter = ItemCheckFilter;
+					IsFilteringEnabled = true;
+				}
+				return Cvs.View;
+			}
+			return null;
+		}
 
-        public void ClearCache()
-        {
-            if (_txtCache != null)
-                _txtCache.Clear();
-        }
+		public void ResetSearchTextBox()
+		{
+			if (FilterPropertyList != null && TxtSearchPanel != null)
+			{
+				//Clear all textbox text
+				foreach (string prop in FilterPropertyList)
+				{
+					var txt = TxtSearchPanel.FindName(GetTextBoxName(prop)) as TextBox;
 
-        public Func<object, bool> OnBeforeCheckFilter;
+					if (!string.IsNullOrEmpty(txt?.Text))
+						txt.Text = string.Empty;
+				}
+			}
+		}
 
-        public Func<object, bool, bool> OnAfterCheckFilter;
+		public void ClearCache()
+		{
+			TxtCache?.Clear();
+		}
 
-        public bool IsFilteringEnabled { get; set; }
+		public Func<object, bool> OnBeforeCheckFilter;
 
-        #endregion
+		public Func<object, bool, bool> OnAfterCheckFilter;
 
-        #region Private Methods
+		public bool IsFilteringEnabled { get; set; }
 
-        protected string getTextBoxName(string prop)
-        {
-            return string.Format("txtFilter{0}", prop).Replace(".", "");
-        }
+		#endregion
 
-        protected bool itemCheckFilter(object item)
-        {
-            bool res = true;
+		#region Private Methods
 
-            if (!IsFilteringEnabled)
-                return res;
+		protected string GetTextBoxName(string prop)
+		{
+			return $"txtFilter{prop}".Replace(".", "");
+		}
 
-            try
-            {
-                if (OnBeforeCheckFilter != null)
-                    res = OnBeforeCheckFilter(item);
+		protected bool ItemCheckFilter(object item)
+		{
+			bool res = true;
 
-                if (!res)
-                    return res;
+			if (!IsFilteringEnabled)
+				return true;
 
-                if (_filterPropertyList != null && _txtSearchPanel != null)
-                {
-                    //Check each filter property
-                    foreach (string prop in _filterPropertyList)
-                    {
-                        TextBox txt = null;
-                        if (_txtCache.ContainsKey(prop))
-                            txt = _txtCache[prop] as TextBox;
-                        else
-                        {
-                            txt = _txtSearchPanel.FindName(getTextBoxName(prop)) as TextBox;
-                            _txtCache[prop] = txt;
-                        }
+			try
+			{
+				if (OnBeforeCheckFilter != null)
+					res = OnBeforeCheckFilter(item);
 
-                        res = false;
-                        if (txt == null)
-                            res = true;
-                        else
-                        {
-                            if (string.IsNullOrEmpty(txt.Text))
-                                res = true;
-                            else
-                            {
-                                try
-                                {
-                                    //Get property value
-                                    object val = getItemValue(item, prop);
-                                    if (val != null)
-                                    {
-                                        string valToCompare = string.Empty;
-                                        if (val is DateTime)
-                                            valToCompare = ((DateTime)val).ToString(GlobalHelper.DisplayDateTimeFormat, System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName));
-                                        else
-                                            valToCompare = val.ToString();
+				if (!res)
+					return false;
 
-                                        if (valToCompare.ToString().IndexOf(txt.Text, StringComparison.OrdinalIgnoreCase) >= 0)
-                                            res = true;
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Debug.WriteLine(ex.Message);
-                                    res = true;
-                                }
-                            }
-                        }
-                        if (!res)
-                            return res;
-                    }
-                }
-                res = true;
-            }
-            finally
-            {
-                if (OnAfterCheckFilter != null)
-                    res = OnAfterCheckFilter(item, res);
+				if (FilterPropertyList != null && TxtSearchPanel != null)
+				{
+					//Check each filter property
+					foreach (string prop in FilterPropertyList)
+					{
+						TextBox txt;
+						if (TxtCache.ContainsKey(prop))
+							txt = TxtCache[prop] as TextBox;
+						else
+						{
+							txt = TxtSearchPanel.FindName(GetTextBoxName(prop)) as TextBox;
+							TxtCache[prop] = txt;
+						}
 
-            }
-            return res;
-        }
+						res = false;
+						if (txt == null)
+							res = true;
+						else
+						{
+							if (string.IsNullOrEmpty(txt.Text))
+								res = true;
+							else
+							{
+								try
+								{
+									//Get property value
+									object val = GetItemValue(item, prop);
 
-        protected object getItemValue(object item, string prop)
-        {
-            object val = null;
-            try
-            {
-                val = item.GetType().GetProperty(prop).GetValue(item, null);
-            }
-            catch
-            {
-                val = null;
-            }
-            return val;
-        }
+									if (val != null)
+									{
+										string valToCompare;
+										if (val is DateTime)
+											valToCompare = ((DateTime)val).ToString(GlobalHelper.DisplayDateTimeFormat, System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName));
+										else
+											valToCompare = val.ToString().ToLower();
 
-        #endregion
-    }
+										var pattern = txt.Text.ToLower();
+
+									    var terms = pattern.Split(' ');
+
+                                        // check for negated/added values
+									    if (terms.Any(term => term.StartsWith("-") || term.StartsWith("+")))
+									    {
+									        res = true;
+
+									        foreach (var term in terms)
+									        {
+									            if (term.StartsWith("-") && valToCompare.Contains(term.Substring(1)))
+									            {
+									                res = false;
+									                break;
+									            }
+
+									            if (term.StartsWith("+") && valToCompare.Contains(term.Substring(1)))
+									            {
+									                res = true;
+									            }
+									            else
+									            {
+									                if (valToCompare.Contains(term))
+									                {
+									                    res = true;
+									                }
+									            }
+									        }
+									    }
+                                        // check for regex
+                                        else if (pattern.Length > 2 && pattern.StartsWith("/") && pattern.EndsWith("/") && _goodregex)
+										{
+											try
+											{
+												if (Regex.IsMatch(valToCompare, pattern.Substring(1, pattern.Length - 2)))
+												{
+													res = true;
+												}
+											}
+											catch
+											{
+												res = true;
+											    _goodregex = false;
+											}
+										}
+                                        // normal search
+										else
+										{
+											if (valToCompare.ToLower().IndexOf(pattern, StringComparison.Ordinal) >= 0)
+											{
+												res = true;
+											}
+										}
+
+									}
+								}
+								catch (Exception ex)
+								{
+									Debug.WriteLine(ex.Message);
+									res = true;
+								}
+							}
+						}
+						if (!res)
+							return false;
+					}
+				}
+			}
+			finally
+			{
+				if (OnAfterCheckFilter != null)
+					res = OnAfterCheckFilter(item, res);
+
+			}
+
+			return res;
+		}
+
+		protected object GetItemValue(object item, string prop)
+		{
+			object val;
+			try
+			{
+				val = item.GetType().GetProperty(prop).GetValue(item, null);
+			}
+			catch
+			{
+				val = null;
+			}
+			return val;
+		}
+
+		#endregion
+	}
 
 }

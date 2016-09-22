@@ -33,13 +33,13 @@ namespace YALV.Common
 
         public void BuildDataGrid(IList<ColumnItem> columns)
         {
-            if (_dg == null)
+            if (Dg == null)
                 return;
 
-            if (_filterPropertyList == null)
-                _filterPropertyList = new List<string>();
+            if (FilterPropertyList == null)
+                FilterPropertyList = new List<string>();
             else
-                _filterPropertyList.Clear();
+                FilterPropertyList.Clear();
 
             if (columns != null)
             {
@@ -61,9 +61,9 @@ namespace YALV.Common
                     col.Binding = bind;
 
                     //Add column to datagrid
-                    _dg.Columns.Add(col);
+                    Dg.Columns.Add(col);
 
-                    if (_txtSearchPanel != null)
+                    if (TxtSearchPanel != null)
                     {
                         Binding widthBind = new Binding()
                         {
@@ -78,23 +78,23 @@ namespace YALV.Common
                         Style txtStyle = Application.Current.FindResource("RoundWatermarkTextBox") as Style;
                         if (txtStyle != null)
                             txt.Style = txtStyle;
-                        txt.Name = getTextBoxName(item.Field);
+                        txt.Name = GetTextBoxName(item.Field);
                         txt.ToolTip = String.Format(Resources.FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip, item.Header);
                         txt.Tag = txt.ToolTip.ToString().ToLower();
                         txt.Text = string.Empty;
                         txt.AcceptsReturn = false;
                         txt.SetBinding(TextBox.WidthProperty, widthBind);
-                        _filterPropertyList.Add(item.Field);
-                        if (_keyUpEvent != null)
-                            txt.KeyUp += _keyUpEvent;
+                        FilterPropertyList.Add(item.Field);
+                        if (KeyUpEvent != null)
+                            txt.KeyUp += KeyUpEvent;
 
-                        RegisterControl<TextBox>(_txtSearchPanel, txt.Name, txt);
-                        _txtSearchPanel.Children.Add(txt);
+                        RegisterControl<TextBox>(TxtSearchPanel, txt.Name, txt);
+                        TxtSearchPanel.Children.Add(txt);
                     }
                 }
             }
 
-            _dg.ColumnReordered += OnColumnReordered;
+            Dg.ColumnReordered += OnColumnReordered;
         }
 
         #endregion
@@ -115,17 +115,17 @@ namespace YALV.Common
                 return;
 
             int displayOrder = dataGridColumnEventArgs.Column.DisplayIndex;
-            string textBoxName = getTextBoxName(field);
+            string textBoxName = GetTextBoxName(field);
 
-            TextBox textBox = (from tb in _txtSearchPanel.Children.OfType<TextBox>()
+            TextBox textBox = (from tb in TxtSearchPanel.Children.OfType<TextBox>()
                                where tb.Name == textBoxName
                                select tb).FirstOrDefault<TextBox>();
 
             if (textBox == null)
                 return;
 
-            _txtSearchPanel.Children.Remove(textBox);
-            _txtSearchPanel.Children.Insert(displayOrder, textBox);
+            TxtSearchPanel.Children.Remove(textBox);
+            TxtSearchPanel.Children.Insert(displayOrder, textBox);
         }
 
         private void RegisterControl<T>(FrameworkElement element, string controlName, T control)
