@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -20,7 +21,6 @@ namespace YALV.Common
             _txtSearchPanel = txtSearchPanel;
             _keyUpEvent = keyUpEvent;
             _filterPropertyList = new List<string>();
-            _txtCache = new Hashtable();
             IsFilteringEnabled = true;
         }
 
@@ -138,15 +138,9 @@ namespace YALV.Common
                     foreach (string prop in _filterPropertyList)
                     {
                         TextBox txt = null;
-                        if (_txtCache.ContainsKey(prop))
-                            txt = _txtCache[prop] as TextBox;
-                        else
-                        {
-                            txt = _txtSearchPanel.FindName(getTextBoxName(prop)) as TextBox;
-                            _txtCache[prop] = txt;
-                        }
+						txt = _txtSearchPanel.FindName(getTextBoxName(prop)) as TextBox;
 
-                        res = false;
+						res = false;
                         if (txt == null)
                             res = true;
                         else
@@ -196,15 +190,30 @@ namespace YALV.Common
         protected object getItemValue(object item, string prop)
         {
             object val = null;
-            try
-            {
-                val = item.GetType().GetProperty(prop).GetValue(item, null);
-            }
-            catch
-            {
-                val = null;
-            }
-            return val;
+
+	        var type = item.GetType();
+	        var properties = type.GetProperties();
+
+			var isBase = properties.Any(p => p.Name == prop);
+			if (isBase)
+			{
+				val = type.GetProperty(prop).GetValue(item, null);
+			}
+			else
+			{
+				try
+				{
+					var custom = type.GetProperty("CustomFields");
+					var inf = custom.GetValue(item, null);
+
+					val = ((Dictionary<string, string>)inf)[prop];
+				}
+				catch (Exception)
+				{
+					val = null;
+				}
+			}
+			return val;
         }
 
         #endregion

@@ -71,6 +71,14 @@ namespace YALV.Core.Providers
                                                     case ("log4net:HostName"):
                                                         entry.HostName = xmlTextReader.GetAttribute("value");
                                                         break;
+													default:
+		                                                var name = xmlTextReader.GetAttribute("name");
+		                                                if (!name.StartsWith("log4net:"))
+		                                                {
+															var val = xmlTextReader.GetAttribute("value");
+															entry.CustomFields.Add(name, val);
+														}
+														break;
                                                 }
                                                 break;
                                             case ("log4j:throwable"):
@@ -97,6 +105,7 @@ namespace YALV.Core.Providers
                     }
                 }
             }
+
         }
 
         private static bool filterByParameters(LogItem entry, FilterParams parameters)
