@@ -13,6 +13,6 @@ namespace YALV.Core
 
         public static string FOLDERS_FILE_PATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "YALVFolders.xml");
 
-        
+        public static string SETTINGS_FILE_PATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "YALVSettings.xml");
     }
 }

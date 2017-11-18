@@ -12,6 +12,8 @@ namespace YALV.Core.Domain
         public double? Width { get; set; }
         public CellAlignment Alignment { get; set; }
 
+        public int DisplayIndex { get; set; }
+
         public ColumnItem(string field, double? minWidth, double? width)
             : this(field, minWidth, width, CellAlignment.DEFAULT, string.Empty, field)
         {

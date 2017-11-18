@@ -15,6 +15,8 @@ namespace YALV.Common
     public class FilteredGridManager
         : FilteredGridManagerBase
     {
+        private static readonly DependencyProperty ColumnIdProperty = DependencyProperty.RegisterAttached("Id", typeof(string), typeof(DataGridTextColumn));
+
         public FilteredGridManager(DataGrid dg, Panel txtSearchPanel, KeyEventHandler keyUpEvent)
             : base(dg, txtSearchPanel, keyUpEvent)
         {
@@ -46,6 +48,7 @@ namespace YALV.Common
                 foreach (ColumnItem item in columns)
                 {
                     DataGridTextColumn col = new DataGridTextColumn();
+                    col.SetValue(ColumnIdProperty, item.Field);
                     col.Header = item.Header;
                     if (item.Alignment == CellAlignment.CENTER && _centerCellStyle != null)
                         col.CellStyle = _centerCellStyle;
@@ -55,7 +58,7 @@ namespace YALV.Common
                         col.Width = item.Width.Value;
 
                     Binding bind = new Binding(item.Field) { Mode = BindingMode.OneWay };
-                    bind.ConverterCulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Resources.CultureName);
+                    bind.ConverterCulture = CultureInfo.GetCultureInfo(Resources.CultureName);
                     if (!String.IsNullOrWhiteSpace(item.StringFormat))
                         bind.StringFormat = item.StringFormat;
                     col.Binding = bind;
@@ -97,23 +100,30 @@ namespace YALV.Common
             _dg.ColumnReordered += OnColumnReordered;
         }
 
+        public IEnumerable<ColumnRenderSettings> GetColumnRenderSettings()
+        {
+            foreach (var column in _dg.Columns.OrderBy(c => c.DisplayIndex))
+            {
+                var columnSettings = new ColumnRenderSettings
+                {
+                    Id = (string)column.GetValue(ColumnIdProperty),
+                    Width = (int)column.ActualWidth,
+                    DisplayIndex = column.DisplayIndex
+                };
+                yield return columnSettings;
+            }
+        }
+
         #endregion
 
         #region Private methods
 
         private void OnColumnReordered(object sender, DataGridColumnEventArgs dataGridColumnEventArgs)
         {
-            if (dataGridColumnEventArgs.Column == null || !(dataGridColumnEventArgs.Column is DataGridBoundColumn))
+            if (dataGridColumnEventArgs.Column == null)
                 return;
 
-            Binding colBind = ((DataGridBoundColumn)dataGridColumnEventArgs.Column).Binding as Binding;
-            if (colBind == null || colBind.Path == null)
-                return;
-
-            string field = colBind.Path.Path;
-            if (String.IsNullOrWhiteSpace(field))
-                return;
-
+            var field = (string)dataGridColumnEventArgs.Column.GetValue(ColumnIdProperty);
             int displayOrder = dataGridColumnEventArgs.Column.DisplayIndex;
             string textBoxName = getTextBoxName(field);
 

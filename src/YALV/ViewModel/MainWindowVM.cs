@@ -1033,6 +1033,12 @@ namespace YALV.ViewModel
             }
         }
 
+        public void SaveSettings()
+        {
+            var columnSettingsCollection = GridManager.GetColumnRenderSettings().ToList();
+            DataService.SaveSettings(columnSettingsCollection, Constants.SETTINGS_FILE_PATH);
+        }
+
         #endregion
 
         #region Privates
@@ -1347,7 +1353,7 @@ namespace YALV.ViewModel
         {
             if (GridManager != null)
             {
-                IList<ColumnItem> dgColumns = new List<ColumnItem>()
+                var dgColumns = new List<ColumnItem>()
                 {
                     new ColumnItem("Id", 37, null, CellAlignment.CENTER,string.Empty){Header = Resources.MainWindowVM_InitDataGrid_IdColumn_Header},
                     new ColumnItem("TimeStamp", 120, null, CellAlignment.CENTER, GlobalHelper.DisplayDateTimeFormat){Header = Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header},
@@ -1364,6 +1370,29 @@ namespace YALV.ViewModel
                     //new ColumnItem("Delta", 60, null, CellAlignment.CENTER, null, "Δ"),
                     //new ColumnItem("Path", 50)
                 };
+
+                // override render settings
+                var columnRenderSettingsCollection = DataService.ParseSettings(Constants.SETTINGS_FILE_PATH);
+                if (columnRenderSettingsCollection != null)
+                {
+                    var query = from columnItem in dgColumns
+                                join columnRenderSettings in columnRenderSettingsCollection
+                                    on columnItem.Field equals columnRenderSettings.Id
+                                select new
+                                {
+                                    columnItem,
+                                    columnRenderSettings
+                                };
+
+                    foreach (var item in query)
+                    {
+                        item.columnItem.Width = item.columnRenderSettings.Width;
+                        item.columnItem.DisplayIndex = item.columnRenderSettings.DisplayIndex;
+                    }
+
+                    dgColumns.Sort(new ColumnItemComparer());
+                }
+
                 GridManager.BuildDataGrid(dgColumns);
                 GridManager.AssignSource(new Binding(MainWindowVM.PROP_Items) { Source = this, Mode = BindingMode.OneWay });
                 GridManager.OnBeforeCheckFilter = levelCheckFilter;

@@ -46,6 +46,8 @@
     <Compile Include="DataService.cs" />
     <Compile Include="Domain\BindableObject.cs" />
     <Compile Include="Domain\ColumnItem.cs" />
+    <Compile Include="Domain\ColumnItemComparer.cs" />
+    <Compile Include="Domain\ColumnRenderSettings.cs" />
     <Compile Include="Domain\DisposableObject.cs" />
     <Compile Include="Domain\EntriesProviderType.cs" />
     <Compile Include="Domain\FileItem.cs" />
