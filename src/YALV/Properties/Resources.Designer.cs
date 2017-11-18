@@ -361,7 +361,7 @@ namespace YALV.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to YALV!- Column Selection.
+        ///   Looks up a localized string similar to YALV! - Column Selection.
         /// </summary>
         public static string ColumnSelection_Title {
             get {

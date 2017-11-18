@@ -578,7 +578,7 @@ It is a WPF Application based on .NET Framework 4.0 and written with C# language
     <value>Id</value>
   </data>
   <data name="ColumnSelection_Title" xml:space="preserve">
-    <value>YALV!- Column Selection</value>
+    <value>YALV! - Column Selection</value>
   </data>
   <data name="ColumnSelection_Button_Cancel" xml:space="preserve">
     <value>Cancel</value>
