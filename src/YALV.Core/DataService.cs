@@ -131,6 +131,9 @@ namespace YALV.Core
                     var widthAttribute = element.Attribute("width");
                     if (widthAttribute != null) columnRenderSettings.Width = int.Parse(widthAttribute.Value);
 
+                    var visibleAttribute = element.Attribute("visible");
+                    if (visibleAttribute != null) columnRenderSettings.Visible = bool.Parse(visibleAttribute.Value);
+
                     result.Add(columnRenderSettings);
                 }
                 return result;
@@ -164,7 +167,8 @@ namespace YALV.Core
                                      select new XElement("column",
                                          new XAttribute("id", columnSettings.Id),
                                          new XAttribute("displayIndex", columnSettings.DisplayIndex),
-                                         new XAttribute("width", columnSettings.Width));
+                                         new XAttribute("width", columnSettings.Width),
+                                         new XAttribute("visible", columnSettings.Visible));
                 columnsElement.ReplaceAll(columnElements);
                 xml.Save(path);
             }

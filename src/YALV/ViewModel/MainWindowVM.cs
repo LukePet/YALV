@@ -36,6 +36,7 @@ namespace YALV.ViewModel
             CommandSelectAllFiles = new CommandRelay(commandSelectAllFilesExecute, commandSelectAllFilesCanExecute);
             CommandIncreaseInterval = new CommandRelay(commandIncreaseIntervalExecute, p => true);
             CommandDecreaseInterval = new CommandRelay(commandDecreaseIntervalExecute, p => true);
+            CommandSelectColumns = new CommandRelay(commandSelectColumnsExecute, _ => true);
             CommandAbout = new CommandRelay(commandAboutExecute, p => true);
 
             FileList = new ObservableCollection<FileItem>();
@@ -147,6 +148,11 @@ namespace YALV.ViewModel
         /// SelectAllFiles Command
         /// </summary>
         public ICommandAncestor CommandSelectAllFiles { get; protected set; }
+
+        /// <summary>
+        /// SelectColumns command
+        /// </summary>
+        public ICommandAncestor CommandSelectColumns { get; protected set; }
 
         /// <summary>
         /// About Command
@@ -452,6 +458,13 @@ namespace YALV.ViewModel
         {
             var win = new About() { Owner = _callingWin as Window };
             win.ShowDialog();
+            return null;
+        }
+
+        protected virtual object commandSelectColumnsExecute(object parameter)
+        {
+            var win = new SelectColumns() { Owner = _callingWin as Window };
+            win.ShowDialog(GridManager);
             return null;
         }
 
@@ -1388,6 +1401,7 @@ namespace YALV.ViewModel
                     {
                         item.columnItem.Width = item.columnRenderSettings.Width;
                         item.columnItem.DisplayIndex = item.columnRenderSettings.DisplayIndex;
+                        item.columnItem.Visible = item.columnRenderSettings.Visible;
                     }
 
                     dgColumns.Sort(new ColumnItemComparer());

@@ -105,6 +105,9 @@
     <Compile Include="AddFolderPath.xaml.cs">
       <DependentUpon>AddFolderPath.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectColumns.xaml.cs">
+      <DependentUpon>SelectColumns.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Components\BusyIndicatorBehavior\BusyIndicatorBehavior.cs" />
     <Compile Include="Common\Components\BusyIndicatorBehavior\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
@@ -120,6 +123,7 @@
     <Compile Include="Common\Components\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CommandReference.cs" />
     <Compile Include="Common\Converters\AdjustValueConverter.cs" />
     <Compile Include="Common\Converters\BoolToOppositeVisibilityConverter.cs" />
     <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
@@ -132,6 +136,7 @@
     <Compile Include="Common\GlobalHelper.cs" />
     <Compile Include="Common\Interfaces\ICommandAncestor.cs" />
     <Compile Include="Common\Interfaces\IWinSimple.cs" />
+    <Compile Include="ViewModel\SelectColumnsVM.cs" />
     <Compile Include="Common\RecentFileList.cs" />
     <Compile Include="Common\ScrollSynchronizer.cs" />
     <Compile Include="Common\Components\MainToolbar.xaml.cs">
@@ -159,6 +164,10 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\AddFolderPathVM.cs" />
+    <Page Include="SelectColumns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

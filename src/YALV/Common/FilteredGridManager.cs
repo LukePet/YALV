@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -56,6 +57,7 @@ namespace YALV.Common
                         col.MinWidth = item.MinWidth.Value;
                     if (item.Width != null)
                         col.Width = item.Width.Value;
+                    col.Visibility = item.Visible ? Visibility.Visible : Visibility.Collapsed;
 
                     Binding bind = new Binding(item.Field) { Mode = BindingMode.OneWay };
                     bind.ConverterCulture = CultureInfo.GetCultureInfo(Resources.CultureName);
@@ -87,6 +89,15 @@ namespace YALV.Common
                         txt.Text = string.Empty;
                         txt.AcceptsReturn = false;
                         txt.SetBinding(TextBox.WidthProperty, widthBind);
+
+                        var visibilityBind = new Binding
+                        {
+                            Path = new PropertyPath(nameof(DataGridColumn.Visibility)),
+                            Source = col,
+                            Mode = BindingMode.OneWay
+                        };
+                        txt.SetBinding(TextBox.VisibilityProperty, visibilityBind);
+
                         _filterPropertyList.Add(item.Field);
                         if (_keyUpEvent != null)
                             txt.KeyUp += _keyUpEvent;
@@ -108,9 +119,41 @@ namespace YALV.Common
                 {
                     Id = (string)column.GetValue(ColumnIdProperty),
                     Width = (int)column.ActualWidth,
-                    DisplayIndex = column.DisplayIndex
+                    DisplayIndex = column.DisplayIndex,
+                    Visible = column.Visibility == Visibility.Visible
                 };
                 yield return columnSettings;
+            }
+        }
+
+        public ColumnVisibilitySettings GetColumnVisibilitySettings()
+        {
+            var settings = new ColumnVisibilitySettings();
+            var map = GetColumnVisibilityMap();
+            foreach (var item in map)
+            {
+                var show = item.Column.Visibility == Visibility.Visible;
+                item.ColumnVisibilitySettingsProperty.SetValue(settings, show, null);
+            }
+            return settings;
+        }
+
+        public void UpdateColumVisibilitySettings(ColumnVisibilitySettings settings)
+        {
+            var map = GetColumnVisibilityMap();
+            foreach (var tuple in map)
+            {
+                var shouldBeVisibile = (bool)tuple.ColumnVisibilitySettingsProperty.GetValue(settings, null);
+                var isVisible = tuple.Column.Visibility == Visibility.Visible;
+
+                if (shouldBeVisibile && !isVisible)
+                {
+                    tuple.Column.Visibility = Visibility.Visible;
+                }
+                else if (!shouldBeVisibile && isVisible)
+                {
+                    tuple.Column.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -147,6 +190,29 @@ namespace YALV.Common
             element.RegisterName(controlName, control);
         }
 
+        private IEnumerable<ColumnVisibilityTuple> GetColumnVisibilityMap()
+        {
+            foreach (var column in _dg.Columns)
+            {
+                var columnId = (string)column.GetValue(ColumnIdProperty);
+                var tuple = new ColumnVisibilityTuple
+                {
+                    Column = column,
+                    ColumnVisibilitySettingsProperty = ColumnVisibilitySettings.GetPropertyByLogItemType(columnId)
+                };
+                yield return tuple;
+            }
+        }
+
         #endregion
+
+        /// <summary>
+        /// Maps a data grid column to a property of <see cref="ColumnVisibilitySettings"/>.
+        /// </summary>
+        private class ColumnVisibilityTuple
+        {
+            public DataGridColumn Column { get; set; }
+            public PropertyInfo ColumnVisibilitySettingsProperty { get; set; }
+        }
     }
 }
