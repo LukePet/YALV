@@ -19,7 +19,7 @@ namespace YALV.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -91,7 +91,7 @@ namespace YALV.Properties {
         ///
         ///Log4Net config file must be setup with XmlLayoutSchemaLog4j layout; just need a few lines in your application config file to configure it to use this format (see examples on right).
         ///
-        ///It is a WPF Application based on .NET Framework 4.0 and writ [rest of string was truncated]&quot;;.
+        ///It is a WPF Application based on .NET Framework 4.0 and written with C#  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string About_Description {
             get {
@@ -195,6 +195,177 @@ namespace YALV.Properties {
         public static string CircularProgressBar_CircularProgressBar_BusyText {
             get {
                 return ResourceManager.GetString("CircularProgressBar_CircularProgressBar_BusyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application.
+        /// </summary>
+        public static string ColumnSelection_ApplicationInfo_Application {
+            get {
+                return ResourceManager.GetString("ColumnSelection_ApplicationInfo_Application", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host name.
+        /// </summary>
+        public static string ColumnSelection_ApplicationInfo_HostName {
+            get {
+                return ResourceManager.GetString("ColumnSelection_ApplicationInfo_HostName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine name.
+        /// </summary>
+        public static string ColumnSelection_ApplicationInfo_MachineName {
+            get {
+                return ResourceManager.GetString("ColumnSelection_ApplicationInfo_MachineName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string ColumnSelection_ApplicationInfo_UserName {
+            get {
+                return ResourceManager.GetString("ColumnSelection_ApplicationInfo_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application information.
+        /// </summary>
+        public static string ColumnSelection_ApplicationInfoGroup_Header {
+            get {
+                return ResourceManager.GetString("ColumnSelection_ApplicationInfoGroup_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string ColumnSelection_BasicInfo_Level {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfo_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logger.
+        /// </summary>
+        public static string ColumnSelection_BasicInfo_Logger {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfo_Logger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string ColumnSelection_BasicInfo_Message {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfo_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thread.
+        /// </summary>
+        public static string ColumnSelection_BasicInfo_Thread {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfo_Thread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        public static string ColumnSelection_BasicInfo_Timestamp {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfo_Timestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic information.
+        /// </summary>
+        public static string ColumnSelection_BasicInfoGroup_Header {
+            get {
+                return ResourceManager.GetString("ColumnSelection_BasicInfoGroup_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string ColumnSelection_Button_Cancel {
+            get {
+                return ResourceManager.GetString("ColumnSelection_Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string ColumnSelection_Button_OK {
+            get {
+                return ResourceManager.GetString("ColumnSelection_Button_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select columns to appear in the Main window:.
+        /// </summary>
+        public static string ColumnSelection_Description {
+            get {
+                return ResourceManager.GetString("ColumnSelection_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string ColumnSelection_Id {
+            get {
+                return ResourceManager.GetString("ColumnSelection_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class.
+        /// </summary>
+        public static string ColumnSelection_LocationInfo_Class {
+            get {
+                return ResourceManager.GetString("ColumnSelection_LocationInfo_Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method.
+        /// </summary>
+        public static string ColumnSelection_LocationInfo_Method {
+            get {
+                return ResourceManager.GetString("ColumnSelection_LocationInfo_Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location information.
+        /// </summary>
+        public static string ColumnSelection_LocationInfoGroup_Header {
+            get {
+                return ResourceManager.GetString("ColumnSelection_LocationInfoGroup_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YALV! - Column Selection.
+        /// </summary>
+        public static string ColumnSelection_Title {
+            get {
+                return ResourceManager.GetString("ColumnSelection_Title", resourceCulture);
             }
         }
         
@@ -888,6 +1059,15 @@ namespace YALV.Properties {
         public static string MainWindow_FullDateTimeFormatWithMilliseconds {
             get {
                 return ResourceManager.GetString("MainWindow_FullDateTimeFormatWithMilliseconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select columns....
+        /// </summary>
+        public static string MainWindow_GridColumnHeaderContextMenu_SelectColumns {
+            get {
+                return ResourceManager.GetString("MainWindow_GridColumnHeaderContextMenu_SelectColumns", resourceCulture);
             }
         }
         

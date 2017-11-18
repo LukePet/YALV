@@ -62,6 +62,7 @@ namespace YALV
             {
                 dgItems.SelectionChanged -= dgItems_SelectionChanged;
                 txtItemId.KeyUp -= txtItemId_KeyUp;
+                _vm.SaveSettings();
                 _vm.Dispose();
             };
             this.Drop += (object sender, DragEventArgs e) =>
