@@ -97,7 +97,17 @@ namespace YALV.Core
             IEnumerable<LogItem> result = null;
             try
             {
-                AbstractEntriesProvider provider = EntriesProviderFactory.GetProvider();
+                AbstractEntriesProvider provider;
+
+                if (Path.GetExtension(path) == ".json")
+                { 
+                    provider = EntriesProviderFactory.GetProvider(EntriesProviderType.Json);
+                }
+                else
+                {
+                    provider = EntriesProviderFactory.GetProvider();
+                }
+
                 result = provider.GetEntries(path);
                 return result.ToList();
             }
