@@ -529,4 +529,7 @@ Si tratta di un'applicazione WPF basata sul .NET Framework 4.0 e scritta con il 
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Deseleziona Tutti I Files</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Json files</value>
+  </data>
 </root>

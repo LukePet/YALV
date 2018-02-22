@@ -529,4 +529,7 @@
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Τα καθαρίζω όλα</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Αρχεία Json</value>
+  </data>
 </root>

@@ -529,4 +529,7 @@ Log4Net 配置必须设为 XmlLayoutSchemaLog4j 布局；在您的应用程序�
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>全部清除</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Json 文件</value>
+  </data>
 </root>
