@@ -64,6 +64,10 @@
 
     <!-- LEVEL COLORS -->
     <SolidColorBrush
+        x:Key="TraceLevelColor"
+        Color="LightCyan"
+        PresentationOptions:Freeze="True" />
+    <SolidColorBrush
         x:Key="DebugLevelColor"
         Color="LightBlue"
         PresentationOptions:Freeze="True" />
@@ -459,10 +463,19 @@
         TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
 
-            <!-- Debug -->
+            <!-- Trace -->
             <DataTrigger
                 Binding="{Binding Path=LevelIndex, Mode=OneWay}"
                 Value="1">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource TraceLevelColor}" />
+            </DataTrigger>
+
+            <!-- Debug -->
+            <DataTrigger
+                Binding="{Binding Path=LevelIndex, Mode=OneWay}"
+                Value="2">
                 <Setter
                     Property="Background"
                     Value="{StaticResource DebugLevelColor}" />
@@ -471,7 +484,7 @@
             <!-- Info -->
             <DataTrigger
                 Binding="{Binding Path=LevelIndex, Mode=OneWay}"
-                Value="2">
+                Value="3">
                 <Setter
                     Property="Background"
                     Value="{StaticResource InfoLevelColor}" />
@@ -480,7 +493,7 @@
             <!-- Warn -->
             <DataTrigger
                 Binding="{Binding Path=LevelIndex, Mode=OneWay}"
-                Value="3">
+                Value="4">
                 <Setter
                     Property="Background"
                     Value="{StaticResource WarnLevelColor}" />
@@ -489,7 +502,7 @@
             <!-- Error -->
             <DataTrigger
                 Binding="{Binding Path=LevelIndex, Mode=OneWay}"
-                Value="4">
+                Value="5">
                 <Setter
                     Property="Background"
                     Value="{StaticResource ErrorLevelColor}" />
@@ -498,7 +511,7 @@
             <!-- Fatal -->
             <DataTrigger
                 Binding="{Binding Path=LevelIndex, Mode=OneWay}"
-                Value="5">
+                Value="6">
                 <Setter
                     Property="Background"
                     Value="{StaticResource FatalLevelColor}" />
@@ -557,6 +570,25 @@
                 <TextBlock
                     Style="{StaticResource tbRbStyle}"
                     Text="ALL" />
+            </RadioButton>
+        </DockPanel>
+    </Border>
+
+    <Border
+        Style="{StaticResource borderRbStyle}"
+        x:Key="RadioButtonTrace"
+        Background="{StaticResource TraceLevelColor}">
+        <DockPanel
+            LastChildFill="True">
+            <RadioButton
+                DockPanel.Dock="Left"
+                GroupName="Selection"
+                IsChecked="{Binding Path=SelectTrace}">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Style="{StaticResource tbRbStyle}"
+                    Text="TRACE" />
+
             </RadioButton>
         </DockPanel>
     </Border>

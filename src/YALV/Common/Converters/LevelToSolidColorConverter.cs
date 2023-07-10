@@ -5,9 +5,12 @@ using System.Windows.Media;
 
 namespace YALV.Common.Converters
 {
+    using YALV.Core.Domain;
+
     public class LevelToSolidColorConverter
         : IValueConverter
     {
+        private SolidColorBrush traceColor = Application.Current.FindResource("TraceLevelColor") as SolidColorBrush;
         private SolidColorBrush debugColor = Application.Current.FindResource("DebugLevelColor") as SolidColorBrush;
         private SolidColorBrush infoColor = Application.Current.FindResource("InfoLevelColor") as SolidColorBrush;
         private SolidColorBrush warnColor = Application.Current.FindResource("WarnLevelColor") as SolidColorBrush;
@@ -22,15 +25,17 @@ namespace YALV.Common.Converters
             int levelIndex = (int)value;
             switch (levelIndex)
             {
-                case 1:
+                case (int)LevelIndex.TRACE:
+                    return traceColor ?? Brushes.Transparent;
+                case (int)LevelIndex.DEBUG:
                     return debugColor ?? Brushes.Transparent;
-                case 2:
+                case (int)LevelIndex.INFO:
                     return infoColor ?? Brushes.Transparent;
-                case 3:
+                case (int)LevelIndex.WARN:
                     return warnColor ?? Brushes.Transparent;
-                case 4:
+                case (int)LevelIndex.ERROR:
                     return errorColor ?? Brushes.Transparent;
-                case 5:
+                case (int)LevelIndex.FATAL:
                     return fatalColor ?? Brushes.Transparent;
                 default:
                     return Brushes.Transparent;
