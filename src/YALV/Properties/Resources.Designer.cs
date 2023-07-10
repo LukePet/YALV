@@ -1029,6 +1029,15 @@ namespace YALV.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Json files.
+        /// </summary>
+        public static string MainWindowVM_commandOpenFileExecute_JsonFilesCaption {
+            get {
+                return ResourceManager.GetString("MainWindowVM_commandOpenFileExecute_JsonFilesCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Log File.
         /// </summary>
         public static string MainWindowVM_commandOpenFileExecute_Open_Log_File {

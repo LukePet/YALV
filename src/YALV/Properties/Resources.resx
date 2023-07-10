@@ -529,4 +529,7 @@ It is a WPF Application based on .NET Framework 4.0 and written with C# language
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Clear All Files</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Json files</value>
+  </data>
 </root>

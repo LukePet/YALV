@@ -529,4 +529,7 @@ C'est le logiciel WPF fondé sur .NET Framework 4.0 et écrite en C#.</value>
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Tout effacer</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Les fichiers Json</value>
+  </data>
 </root>
