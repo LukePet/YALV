@@ -24,7 +24,7 @@
             x:Key="StringEmptyToVisibilityConverter" />
         <converters:TimeDeltaDoubleToLocalizedStringConverter
             x:Key="TimeDeltaDoubleToLocalizedStringConverter" />
-        
+
         <ContextMenu
             x:Key="FilesListBoxContextMenu">
             <MenuItem
@@ -87,11 +87,9 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="Auto">
+                            Width="Auto" MinWidth="503">
                         </ColumnDefinition>
-                        <ColumnDefinition
-                            Width="*">
-                        </ColumnDefinition>
+                        <ColumnDefinition/>
                         <ColumnDefinition
                             Width="Auto">
                         </ColumnDefinition>
@@ -101,8 +99,7 @@
                     <local:MainToolbar
                         Style="{StaticResource DefaultToolbarStyle}"
                         Grid.Column="0"
-                        Margin="5,0,0,0"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left" Width="503" />
 
                     <StackPanel
                         Grid.Column="2"
@@ -147,17 +144,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="Items.Count" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                                 <!-- DEBUG -->
@@ -169,17 +166,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsDebugFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsDebugCount" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                                 <!-- INFO -->
@@ -191,17 +188,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsInfoFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsInfoCount" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                                 <!-- WARN -->
@@ -213,17 +210,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsWarnFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsWarnCount" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                                 <!-- ERROR -->
@@ -235,17 +232,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsErrorFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsErrorCount" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                                 <!-- FATAL -->
@@ -257,17 +254,17 @@
                                         HorizontalAlignment="Center" />
                                     <TextBlock
                                         Style="{StaticResource tbCountStyle}">
-                                                <TextBlock.Text>
-                                                    <MultiBinding
+                                        <TextBlock.Text>
+                                            <MultiBinding
                                                         StringFormat="{}[ {0} / {1} ]">
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsFatalFilterCount" />
-                                                        <Binding
+                                                <Binding
                                                             Mode="OneWay"
                                                             Path="ItemsFatalCount" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>
@@ -813,7 +810,7 @@
                                                 ConverterCulture="{x:Static yalv:MainWindow.ResolvedCulture}"
                                                 Path="SelectedLogItem.TimeStamp"
                                             />
-                                        
+
                                     </TextBlock.Text>
                                 </TextBlock>
                             </StackPanel>
