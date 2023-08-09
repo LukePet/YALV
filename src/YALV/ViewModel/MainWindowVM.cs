@@ -36,6 +36,7 @@ namespace YALV.ViewModel
             CommandSelectAllFiles = new CommandRelay(commandSelectAllFilesExecute, commandSelectAllFilesCanExecute);
             CommandIncreaseInterval = new CommandRelay(commandIncreaseIntervalExecute, p => true);
             CommandDecreaseInterval = new CommandRelay(commandDecreaseIntervalExecute, p => true);
+            CommandSelectColumns = new CommandRelay(commandSelectColumnsExecute, _ => true);
             CommandAbout = new CommandRelay(commandAboutExecute, p => true);
 
             FileList = new ObservableCollection<FileItem>();
@@ -147,6 +148,11 @@ namespace YALV.ViewModel
         /// SelectAllFiles Command
         /// </summary>
         public ICommandAncestor CommandSelectAllFiles { get; protected set; }
+
+        /// <summary>
+        /// SelectColumns command
+        /// </summary>
+        public ICommandAncestor CommandSelectColumns { get; protected set; }
 
         /// <summary>
         /// About Command
@@ -452,6 +458,13 @@ namespace YALV.ViewModel
         {
             var win = new About() { Owner = _callingWin as Window };
             win.ShowDialog();
+            return null;
+        }
+
+        protected virtual object commandSelectColumnsExecute(object parameter)
+        {
+            var win = new SelectColumns() { Owner = _callingWin as Window };
+            win.ShowDialog(GridManager);
             return null;
         }
 
@@ -1033,6 +1046,12 @@ namespace YALV.ViewModel
             }
         }
 
+        public void SaveSettings()
+        {
+            var columnSettingsCollection = GridManager.GetColumnRenderSettings().ToList();
+            DataService.SaveSettings(columnSettingsCollection, Constants.SETTINGS_FILE_PATH);
+        }
+
         #endregion
 
         #region Privates
@@ -1347,7 +1366,7 @@ namespace YALV.ViewModel
         {
             if (GridManager != null)
             {
-                IList<ColumnItem> dgColumns = new List<ColumnItem>()
+                var dgColumns = new List<ColumnItem>()
                 {
                     new ColumnItem("Id", 37, null, CellAlignment.CENTER,string.Empty){Header = Resources.MainWindowVM_InitDataGrid_IdColumn_Header},
                     new ColumnItem("TimeStamp", 120, null, CellAlignment.CENTER, GlobalHelper.DisplayDateTimeFormat){Header = Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header},
@@ -1364,6 +1383,30 @@ namespace YALV.ViewModel
                     //new ColumnItem("Delta", 60, null, CellAlignment.CENTER, null, "Δ"),
                     //new ColumnItem("Path", 50)
                 };
+
+                // override render settings
+                var columnRenderSettingsCollection = DataService.ParseSettings(Constants.SETTINGS_FILE_PATH);
+                if (columnRenderSettingsCollection != null)
+                {
+                    var query = from columnItem in dgColumns
+                                join columnRenderSettings in columnRenderSettingsCollection
+                                    on columnItem.Field equals columnRenderSettings.Id
+                                select new
+                                {
+                                    columnItem,
+                                    columnRenderSettings
+                                };
+
+                    foreach (var item in query)
+                    {
+                        item.columnItem.Width = item.columnRenderSettings.Width;
+                        item.columnItem.DisplayIndex = item.columnRenderSettings.DisplayIndex;
+                        item.columnItem.Visible = item.columnRenderSettings.Visible;
+                    }
+
+                    dgColumns.Sort(new ColumnItemComparer());
+                }
+
                 GridManager.BuildDataGrid(dgColumns);
                 GridManager.AssignSource(new Binding(MainWindowVM.PROP_Items) { Source = this, Mode = BindingMode.OneWay });
                 GridManager.OnBeforeCheckFilter = levelCheckFilter;
