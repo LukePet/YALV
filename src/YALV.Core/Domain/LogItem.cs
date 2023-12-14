@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace YALV.Core.Domain
 {
@@ -23,6 +24,8 @@ namespace YALV.Core.Domain
         public string File { get; set; }
         public string Line { get; set; }
         public string Uncategorized { get; set; }
+
+	    public Dictionary<string, string> CustomFields { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// LevelIndex
