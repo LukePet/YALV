@@ -157,6 +157,28 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
+                                <!-- TRACE -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonTrace}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                        <TextBlock.Text>
+                                            <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsTraceFilterCount" />
+                                                <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsTraceCount" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
                                 <!-- DEBUG -->
                                 <StackPanel
                                     Margin="15,0,0,0"
@@ -293,6 +315,14 @@
                                     </Style>
                                 </StackPanel.Resources>
 
+                                <Border
+                                    Background="{StaticResource TraceLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelTrace}"
+                                        Name="chkShowTrace"
+                                        ToolTip="TRACE" />
+                                </Border>
+                                
                                 <Border
                                     Background="{StaticResource DebugLevelColor}">
                                     <CheckBox
@@ -923,7 +953,6 @@
                     <DataGrid
 						CanUserReorderColumns="True"
                         CellStyle="{StaticResource DefaultDataGridCellStyle}"
-                        ColumnHeaderStyle="{StaticResource DefaultDataGridHeaderStyle}"
                         IsSynchronizedWithCurrentItem="True"
 						Margin="0,1,0,0"
                         Name="dgItems"
@@ -949,7 +978,27 @@
                             <SolidColorBrush
                                 x:Key="{x:Static SystemColors.HighlightBrushKey}"
                                 Color="#19000000" />
+                            <local:CommandReference 
+                                x:Key="CommandSelectColumnsReference"
+                                Command="{Binding Path=CommandSelectColumns}" />
                         </DataGrid.Resources>
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style 
+                                TargetType="DataGridColumnHeader" 
+                                BasedOn="{StaticResource DefaultDataGridHeaderStyle}">
+                                <Setter 
+                                    Property="ContextMenu">
+                                    <Setter.Value>
+                                        <ContextMenu>
+                                            <MenuItem
+                                                Header="{x:Static Properties:Resources.MainWindow_GridColumnHeaderContextMenu_SelectColumns}"
+                                                Command="{StaticResource CommandSelectColumnsReference}" />
+                                        </ContextMenu>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
                 </DockPanel>
 

@@ -17,7 +17,9 @@ namespace YALV.Core.Providers
 
                 case EntriesProviderType.MsSqlServer:
                     return new MsSqlServerEntriesProvider();
-
+					
+                case EntriesProviderType.Json:
+                    return new JsonEntriesProvider();
                 default:
                     var message = String.Format((string) "Type {0} not supported", (object) type);
                     throw new NotImplementedException(message);

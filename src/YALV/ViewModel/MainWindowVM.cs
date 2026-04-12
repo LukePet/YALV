@@ -36,6 +36,7 @@ namespace YALV.ViewModel
             CommandSelectAllFiles = new CommandRelay(commandSelectAllFilesExecute, commandSelectAllFilesCanExecute);
             CommandIncreaseInterval = new CommandRelay(commandIncreaseIntervalExecute, p => true);
             CommandDecreaseInterval = new CommandRelay(commandDecreaseIntervalExecute, p => true);
+            CommandSelectColumns = new CommandRelay(commandSelectColumnsExecute, _ => true);
             CommandAbout = new CommandRelay(commandAboutExecute, p => true);
 
             FileList = new ObservableCollection<FileItem>();
@@ -47,8 +48,8 @@ namespace YALV.ViewModel
             IsLoading = false;
 
             _selectAll = true;
-            _selectDebug = _selectInfo = _selectWarn = _selectError = _selectFatal = false;
-            _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
+            _selectTrace = _selectDebug = _selectInfo = _selectWarn = _selectError = _selectFatal = false;
+            _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
 
             bkLoader = new BackgroundWorker();
             bkLoader.WorkerSupportsCancellation = true;
@@ -149,6 +150,11 @@ namespace YALV.ViewModel
         public ICommandAncestor CommandSelectAllFiles { get; protected set; }
 
         /// <summary>
+        /// SelectColumns command
+        /// </summary>
+        public ICommandAncestor CommandSelectColumns { get; protected set; }
+
+        /// <summary>
         /// About Command
         /// </summary>
         public ICommandAncestor CommandAbout { get; protected set; }
@@ -164,7 +170,7 @@ namespace YALV.ViewModel
             using (System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog())
             {
                 bool addFile = parameter != null && parameter.Equals("ADD");
-                dlg.Filter = String.Format("{0} (*.xml)|*.xml|{1} (*.*)|*.*", Properties.Resources.MainWindowVM_commandOpenFileExecute_XmlFilesCaption, Properties.Resources.MainWindowVM_commandOpenFileExecute_AllFilesCaption);
+                dlg.Filter = String.Format("{0} (*.xml)|*.xml|{1} (*.json)|*.json|{2} (*.*)|*.*", Properties.Resources.MainWindowVM_commandOpenFileExecute_XmlFilesCaption, Properties.Resources.MainWindowVM_commandOpenFileExecute_JsonFilesCaption, Properties.Resources.MainWindowVM_commandOpenFileExecute_AllFilesCaption);
                 dlg.DefaultExt = "xml";
                 dlg.Multiselect = true;
                 dlg.Title = addFile ? Resources.MainWindowVM_commandOpenFileExecute_Add_Log_File : Resources.MainWindowVM_commandOpenFileExecute_Open_Log_File;
@@ -455,6 +461,13 @@ namespace YALV.ViewModel
             return null;
         }
 
+        protected virtual object commandSelectColumnsExecute(object parameter)
+        {
+            var win = new SelectColumns() { Owner = _callingWin as Window };
+            win.ShowDialog(GridManager);
+            return null;
+        }
+
         #endregion
 
         #region Public Properties
@@ -685,6 +698,26 @@ namespace YALV.ViewModel
         public static string PROP_SelectedLogItem = "SelectedLogItem";
 
         /// <summary>
+        /// ShowLevelTrace Property
+        /// </summary>
+        public bool ShowLevelTrace
+        {
+            get { return _showLevelTrace; }
+            set
+            {
+                if (value != _showLevelTrace)
+                {
+                    _showLevelTrace = value;
+                    RaisePropertyChanged(PROP_ShowLevelTrace);
+                    resetLevelSelection();
+                    RefreshView();
+                }
+            }
+        }
+        private bool _showLevelTrace;
+        public static string PROP_ShowLevelTrace = "ShowLevelTrace";
+
+        /// <summary>
         /// ShowLevelDebug Property
         /// </summary>
         public bool ShowLevelDebug
@@ -799,7 +832,7 @@ namespace YALV.ViewModel
 
                     if (_selectAll)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = true;
                         refreshCheckBoxBinding();
                         RefreshView();
                     }
@@ -808,6 +841,32 @@ namespace YALV.ViewModel
         }
         private bool _selectAll;
         public static string PROP_SelectAll = "SelectAll";
+
+        /// <summary>
+        /// SelectTrace Property
+        /// </summary>
+        public bool SelectTrace
+        {
+            get { return _selectTrace; }
+            set
+            {
+                if (value != _selectTrace)
+                {
+                    _selectTrace = value;
+                    RaisePropertyChanged(PROP_SelectTrace);
+
+                    if (_selectTrace)
+                    {
+                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = true;
+                        refreshCheckBoxBinding();
+                        RefreshView();
+                    }
+                }
+            }
+        }
+        private bool _selectTrace;
+        public static string PROP_SelectTrace = "SelectTrace";
 
         /// <summary>
         /// SelectDebug Property
@@ -824,7 +883,7 @@ namespace YALV.ViewModel
 
                     if (_selectDebug)
                     {
-                        _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelInfo = _showLevelWarn = _showLevelError = _showLevelFatal = false;
                         _showLevelDebug = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -850,7 +909,7 @@ namespace YALV.ViewModel
 
                     if (_selectInfo)
                     {
-                        _showLevelDebug = _showLevelWarn = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelWarn = _showLevelError = _showLevelFatal = false;
                         _showLevelInfo = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -876,7 +935,7 @@ namespace YALV.ViewModel
 
                     if (_selectWarn)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelError = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelError = _showLevelFatal = false;
                         _showLevelWarn = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -902,7 +961,7 @@ namespace YALV.ViewModel
 
                     if (_selectError)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelFatal = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelFatal = false;
                         _showLevelError = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -928,7 +987,7 @@ namespace YALV.ViewModel
 
                     if (_selectFatal)
                     {
-                        _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = false;
+                        _showLevelTrace = _showLevelDebug = _showLevelInfo = _showLevelWarn = _showLevelError = false;
                         _showLevelFatal = true;
                         refreshCheckBoxBinding();
                         RefreshView();
@@ -1033,6 +1092,12 @@ namespace YALV.ViewModel
             }
         }
 
+        public void SaveSettings()
+        {
+            var columnSettingsCollection = GridManager.GetColumnRenderSettings().ToList();
+            DataService.SaveSettings(columnSettingsCollection, Constants.SETTINGS_FILE_PATH);
+        }
+
         #endregion
 
         #region Privates
@@ -1045,6 +1110,7 @@ namespace YALV.ViewModel
 
         private void refreshCheckBoxBinding()
         {
+            RaisePropertyChanged(PROP_ShowLevelTrace);
             RaisePropertyChanged(PROP_ShowLevelDebug);
             RaisePropertyChanged(PROP_ShowLevelInfo);
             RaisePropertyChanged(PROP_ShowLevelWarn);
@@ -1055,6 +1121,7 @@ namespace YALV.ViewModel
         private void resetLevelSelection()
         {
             SelectAll = false;
+            SelectTrace = false;
             SelectDebug = false;
             SelectInfo = false;
             SelectWarn = false;
@@ -1347,7 +1414,7 @@ namespace YALV.ViewModel
         {
             if (GridManager != null)
             {
-                IList<ColumnItem> dgColumns = new List<ColumnItem>()
+                var dgColumns = new List<ColumnItem>()
                 {
                     new ColumnItem("Id", 37, null, CellAlignment.CENTER,string.Empty){Header = Resources.MainWindowVM_InitDataGrid_IdColumn_Header},
                     new ColumnItem("TimeStamp", 120, null, CellAlignment.CENTER, GlobalHelper.DisplayDateTimeFormat){Header = Resources.MainWindowVM_InitDataGrid_TimeStampColumn_Header},
@@ -1364,6 +1431,30 @@ namespace YALV.ViewModel
                     //new ColumnItem("Delta", 60, null, CellAlignment.CENTER, null, "Δ"),
                     //new ColumnItem("Path", 50)
                 };
+
+                // override render settings
+                var columnRenderSettingsCollection = DataService.ParseSettings(Constants.SETTINGS_FILE_PATH);
+                if (columnRenderSettingsCollection != null)
+                {
+                    var query = from columnItem in dgColumns
+                                join columnRenderSettings in columnRenderSettingsCollection
+                                    on columnItem.Field equals columnRenderSettings.Id
+                                select new
+                                {
+                                    columnItem,
+                                    columnRenderSettings
+                                };
+
+                    foreach (var item in query)
+                    {
+                        item.columnItem.Width = item.columnRenderSettings.Width;
+                        item.columnItem.DisplayIndex = item.columnRenderSettings.DisplayIndex;
+                        item.columnItem.Visible = item.columnRenderSettings.Visible;
+                    }
+
+                    dgColumns.Sort(new ColumnItemComparer());
+                }
+
                 GridManager.BuildDataGrid(dgColumns);
                 GridManager.AssignSource(new Binding(MainWindowVM.PROP_Items) { Source = this, Mode = BindingMode.OneWay });
                 GridManager.OnBeforeCheckFilter = levelCheckFilter;
@@ -1389,6 +1480,8 @@ namespace YALV.ViewModel
             {
                 switch (logItem.LevelIndex)
                 {
+                    case LevelIndex.TRACE:
+                        return ShowLevelTrace;
                     case LevelIndex.DEBUG:
                         return ShowLevelDebug;
                     case LevelIndex.INFO:
@@ -1407,6 +1500,21 @@ namespace YALV.ViewModel
         #endregion
 
         #region Counters
+
+        /// <summary>
+        /// ItemsTraceCount Property
+        /// </summary>
+        public int ItemsTraceCount
+        {
+            get { return _itemsTraceCount; }
+            set
+            {
+                _itemsTraceCount = value;
+                RaisePropertyChanged(PROP_ItemsTraceCount);
+            }
+        }
+        private int _itemsTraceCount;
+        public static string PROP_ItemsTraceCount = "ItemsTraceCount";
 
         /// <summary>
         /// ItemsDebugCount Property
@@ -1482,6 +1590,21 @@ namespace YALV.ViewModel
         }
         private int _itemsFatalCount;
         public static string PROP_ItemsFatalCount = "ItemsFatalCount";
+
+        /// <summary>
+        /// ItemsTraceFilterCount Property
+        /// </summary>
+        public int ItemsTraceFilterCount
+        {
+            get { return _itemsTraceFilterCount; }
+            set
+            {
+                _itemsTraceFilterCount = value;
+                RaisePropertyChanged(PROP_ItemsTraceFilterCount);
+            }
+        }
+        private int _itemsTraceFilterCount;
+        public static string PROP_ItemsTraceFilterCount = "ItemsTraceFilterCount";
 
         /// <summary>
         /// ItemsDebugFilterCount Property
@@ -1579,6 +1702,10 @@ namespace YALV.ViewModel
                                where it.Level.Equals("DEBUG", StringComparison.OrdinalIgnoreCase)
                                select it).Count();
 
+            ItemsTraceCount = (from it in Items
+                               where it.Level.Equals("TRACE", StringComparison.OrdinalIgnoreCase)
+                               select it).Count();
+
             ItemsInfoCount = (from it in Items
                               where it.Level.Equals("INFO", StringComparison.OrdinalIgnoreCase)
                               select it).Count();
@@ -1607,6 +1734,10 @@ namespace YALV.ViewModel
                 {
                     ItemsFilterCount = fltList.Count();
 
+                    ItemsTraceFilterCount = (from it in fltList
+                                             where it.Level.Equals("TRACE", StringComparison.OrdinalIgnoreCase)
+                                             select it).Count();
+
                     ItemsDebugFilterCount = (from it in fltList
                                              where it.Level.Equals("DEBUG", StringComparison.OrdinalIgnoreCase)
                                              select it).Count();
@@ -1631,6 +1762,7 @@ namespace YALV.ViewModel
             else
             {
                 ItemsFilterCount = 0;
+                ItemsTraceFilterCount = 0;
                 ItemsDebugFilterCount = 0;
                 ItemsInfoFilterCount = 0;
                 ItemsWarnFilterCount = 0;

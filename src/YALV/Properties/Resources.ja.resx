@@ -522,4 +522,7 @@ Log4Net の設定ファイルは "XmlLayoutSchemaLog4j" レイアウトである
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>すべてクリア</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Json ファイル</value>
+  </data>
 </root>
