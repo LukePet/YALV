@@ -157,6 +157,28 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
+                                <!-- TRACE -->
+                                <StackPanel
+                                    Margin="15,0,0,0"
+                                    Orientation="Vertical">
+                                    <ContentControl
+                                        Content="{StaticResource RadioButtonTrace}"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock
+                                        Style="{StaticResource tbCountStyle}">
+                                        <TextBlock.Text>
+                                            <MultiBinding
+                                                        StringFormat="{}[ {0} / {1} ]">
+                                                <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsTraceFilterCount" />
+                                                <Binding
+                                                            Mode="OneWay"
+                                                            Path="ItemsTraceCount" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
                                 <!-- DEBUG -->
                                 <StackPanel
                                     Margin="15,0,0,0"
@@ -293,6 +315,14 @@
                                     </Style>
                                 </StackPanel.Resources>
 
+                                <Border
+                                    Background="{StaticResource TraceLevelColor}">
+                                    <CheckBox
+                                        IsChecked="{Binding Path=ShowLevelTrace}"
+                                        Name="chkShowTrace"
+                                        ToolTip="TRACE" />
+                                </Border>
+                                
                                 <Border
                                     Background="{StaticResource DebugLevelColor}">
                                     <CheckBox
