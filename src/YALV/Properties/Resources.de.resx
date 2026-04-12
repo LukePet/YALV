@@ -529,4 +529,7 @@ Diese Anwendung basiert auf das .NET Framework 4.0 mit WPF unter Verwendung ver 
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Alles Löschen</value>
   </data>
+  <data name="MainWindowVM_commandOpenFileExecute_JsonFilesCaption" xml:space="preserve">
+    <value>Json-Dateien</value>
+  </data>
 </root>
