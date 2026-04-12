@@ -54,6 +54,9 @@ namespace YALV.Core.Domain
             string ul = !String.IsNullOrWhiteSpace(level) ? level.Trim().ToUpper() : string.Empty;
             switch (ul)
             {
+                case "TRACE":
+                    LevelIndex = LevelIndex.TRACE;
+                    break;
                 case "DEBUG":
                     LevelIndex = LevelIndex.DEBUG;
                     break;
@@ -81,10 +84,11 @@ namespace YALV.Core.Domain
     public enum LevelIndex
     {
         NONE = 0,
-        DEBUG = 1,
-        INFO = 2,
-        WARN = 3,
-        ERROR = 4,
-        FATAL = 5
+        TRACE = 1,
+        DEBUG = 2,
+        INFO = 3,
+        WARN = 4,
+        ERROR = 5,
+        FATAL = 6
     }
 }

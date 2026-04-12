@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MainWindow_DetailsBox_ItemId_Text" xml:space="preserve">
+    <value>Girdi Id:</value>
+  </data>
+  <data name="MainWindow_SelectionTooltip" xml:space="preserve">
+    <value>filtrelenmiş girdi sayısı / toplam girdi sayısı</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessMessage" xml:space="preserve">
+    <value>Klasör listesi kaydedildi</value>
+  </data>
+  <data name="AddFolderPathVM_commandSaveExecute_SuccessTitle" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_AllFilesCaption" xml:space="preserve">
+    <value>Tüm dosyalar</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_XmlFilesCaption" xml:space="preserve">
+    <value>Xml Dosyaları</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Add_Log_File" xml:space="preserve">
+    <value>Günlük Dosyasını Ekle</value>
+  </data>
+  <data name="MainWindowVM_commandOpenFileExecute_Open_Log_File" xml:space="preserve">
+    <value>Günlük Dosyasını Aç</value>
+  </data>
+  <data name="MainWindowVM_commandSelectFolderExecute_Description" xml:space="preserve">
+    <value>Günlük Klasörünü Seç</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmText" xml:space="preserve">
+    <value>Seçili dosyaların tamamını silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteCheckedFiles_ConfirmTitle" xml:space="preserve">
+    <value>Silme işlemini onayla</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmText" xml:space="preserve">
+    <value>Seçili dosyaların tamamını silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="MainWindowVM_commandDeleteExecute_DeleteSelectedFile_ConfirmTitle" xml:space="preserve">
+    <value>Silme işlemini onayla</value>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessage_Text" xml:space="preserve">
+    <value>Klasör bulunamadı!
+[{0}]</value>
+    <comment>0 - folder path</comment>
+  </data>
+  <data name="MainWindowVM_loadFolderFiles_ErrorMessageText_Title" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Title" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="MainWindowVM_deleteFile_ErrorMessage_Text" xml:space="preserve">
+    <value>Dosya silme hatası!
+[{0}]
+
+{1}</value>
+    <comment>0 - log file path, 1 - exception message</comment>
+  </data>
+  <data name="MainWindowVM_updateJumpList_CustomCategoryName" xml:space="preserve">
+    <value>Yakında</value>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Text" xml:space="preserve">
+    <value>Okunamayan Dosya!
+
+{0}</value>
+    <comment>0 - exception message</comment>
+  </data>
+  <data name="MainWindowVM_bkLoaderCompleted_UnreadableFile_Title" xml:space="preserve">
+    <value>Uyarı</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFile_Header" xml:space="preserve">
+    <value>Dosya Ekle...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_AddFolderPath_Header" xml:space="preserve">
+    <value>Klasörü Favorilere Ekle</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_Header" xml:space="preserve">
+    <value>Dosya</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_OpenFile_Header" xml:space="preserve">
+    <value>Dosyayı Aç...</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_RecentFiles_Header" xml:space="preserve">
+    <value>Son Dosyalar</value>
+  </data>
+  <data name="Common_Components_MainMenu_FileMenu_SelectFolder_Header" xml:space="preserve">
+    <value>Klasörü Aç</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_Header" xml:space="preserve">
+    <value>Görünüm</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>Klasörü Gezginde göster</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>Dosya Listesini Yenile</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_RefreshLog_Header" xml:space="preserve">
+    <value>Günlüğü Yenile</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_ClearFilters_Header" xml:space="preserve">
+    <value>Filtreleri Temizle</value>
+  </data>
+  <data name="Common_Components_MainMenu_ViewMenu_DeleteFile_Header" xml:space="preserve">
+    <value>Dosyayı Sil</value>
+  </data>
+  <data name="Common_Components_MainMenu_AboutMenu_Header" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_ToolTip" xml:space="preserve">
+    <value>Dosyayı aç...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_OpenFile_Text" xml:space="preserve">
+    <value>DOSYAYI AÇ</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Tooltip" xml:space="preserve">
+    <value>Dosya ekle...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFile_Text" xml:space="preserve">
+    <value>DOSYA EKLE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Tooltip" xml:space="preserve">
+    <value>Klasörü Aç...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_SelectFolder_Text" xml:space="preserve">
+    <value>DOSYAYI AÇ</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Tooltip" xml:space="preserve">
+    <value>Klasörü Favorilere ekle...</value>
+  </data>
+  <data name="Common_Components_MainToolbar_AddFolderPath_Text" xml:space="preserve">
+    <value>KLASÖR EKLE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Tooltip" xml:space="preserve">
+    <value>Günlüğü Yenile</value>
+  </data>
+  <data name="Common_Components_MainToolbar_RefreshLog_Text" xml:space="preserve">
+    <value>YENİLE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Tooltip" xml:space="preserve">
+    <value>Filtreleri Temizle</value>
+  </data>
+  <data name="Common_Components_MainToolbar_ClearFilters_Text" xml:space="preserve">
+    <value>FİLTRELERİ TEMİZLE</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Tooltip" xml:space="preserve">
+    <value>Seçilen dosyayı sil</value>
+  </data>
+  <data name="Common_Components_MainToolbar_DeleteSelectedFile_Text" xml:space="preserve">
+    <value>DOSYAYI SİL</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Tooltip" xml:space="preserve">
+    <value>Favorileri Kaydet</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_SaveList_Text" xml:space="preserve">
+    <value>KAYDET</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Tooltip" xml:space="preserve">
+    <value>Klasörü favorilere ekle</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_AddNewItem_Text" xml:space="preserve">
+    <value>EKLE</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Tooltip" xml:space="preserve">
+    <value>Seçilen klasörü favorilerden çıkar</value>
+  </data>
+  <data name="Common_Components_AddRemoveToolbar_RemoveSelectedItem_Text" xml:space="preserve">
+    <value>ÇIKAR</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_AddNewItem_Header" xml:space="preserve">
+    <value>Klasörü favorilere ekle</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Header" xml:space="preserve">
+    <value>Dosya</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_RemoveSelectedItem_Header" xml:space="preserve">
+    <value>Klasörü favorilerden çıkar</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_SaveList_Header" xml:space="preserve">
+    <value>Favorilere Kaydet</value>
+  </data>
+  <data name="Common_Components_AddRemoveMenu_FileMenu_Exit_Header" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Logger_Text" xml:space="preserve">
+    <value>Logger:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Level_Text" xml:space="preserve">
+    <value>Seviye:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeStamp_Text" xml:space="preserve">
+    <value>Zaman:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_TimeDiff_Text" xml:space="preserve">
+    <value>Δ [önceki girdiden itibaren zaman]:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_MachineName_Text" xml:space="preserve">
+    <value>Makine Adı:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_HostName_Text" xml:space="preserve">
+    <value>Host Adı:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_UserName_Text" xml:space="preserve">
+    <value>Kullanıcı Adı:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Application_Text" xml:space="preserve">
+    <value>Uygulama:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Thread_Text" xml:space="preserve">
+    <value>İş Parçacığı:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Message_Text" xml:space="preserve">
+    <value>Mesaj:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Throwable_Text" xml:space="preserve">
+    <value>Throwable:</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_Checkbox_Text" xml:space="preserve">
+    <value>Oto Yenile</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_DecreaseInterval_Tooltip" xml:space="preserve">
+    <value>Aralığı Düşür</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_RefreshInterval_Tooltip" xml:space="preserve">
+    <value>Aralığı Yenile</value>
+  </data>
+  <data name="MainWindow_AutoRefresh_IncreaseInterval_Tooltip" xml:space="preserve">
+    <value>Aralığı Arttır</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Class_Text" xml:space="preserve">
+    <value>Sınıf:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Method_Text" xml:space="preserve">
+    <value>Metod:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_File_Text" xml:space="preserve">
+    <value>Dosya:</value>
+  </data>
+  <data name="MainWindow_DetailsBox_Line_Text" xml:space="preserve">
+    <value>Satır:</value>
+  </data>
+  <data name="MainWindow_MergeFile_Tooltip" xml:space="preserve">
+    <value>Birleştirilecek Dosyayı Seç</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_DeleteFile_Header" xml:space="preserve">
+    <value>Dosyayı Sil</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_RefreshFileList_Header" xml:space="preserve">
+    <value>Dosya Listesini Yenile</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_OpenSelectedFolder_Header" xml:space="preserve">
+    <value>Seçilen Klasörü Aç</value>
+  </data>
+  <data name="MainWindow_ShowHideGroupBox_Header" xml:space="preserve">
+    <value>GÖSTER/GİZLE</value>
+  </data>
+  <data name="MainWindow_SelectionGroupBox_Header" xml:space="preserve">
+    <value>FİLTRELE</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="SaveFolderPath_Title" xml:space="preserve">
+    <value>YALV! - Favorileri Düzenle</value>
+  </data>
+  <data name="AddFolderPath_Grid_NameColumn_Name" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="AddFolderPath_Grid_PathColumn_Name" xml:space="preserve">
+    <value>Dosya Yolu</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>YALV! - Hakkında</value>
+  </data>
+  <data name="About_Header_Text" xml:space="preserve">
+    <value>YALV! - Yet Another Log4Net Viewer</value>
+  </data>
+  <data name="About_AboutGroupBox_Header" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="About_CreditsGroupBox_Header" xml:space="preserve">
+    <value>Katkıda bulunanlar</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Header" xml:space="preserve">
+    <value>Log4Net Yapılandırması</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample1_Title" xml:space="preserve">
+    <value>Örnek 1:</value>
+  </data>
+  <data name="About_Log4NetConfigurationGroupbox_Sample2_Title" xml:space="preserve">
+    <value>Örnek 2:</value>
+  </data>
+  <data name="FilteredGridManager_BuildDataGrid_FilterTextBox_Tooltip" xml:space="preserve">
+    <value>Filtre {0}</value>
+  </data>
+  <data name="GlobalHelper_DISPLAY_DATETIME_FORMAT" xml:space="preserve">
+    <value>MMM d, HH:mm:ss.fff</value>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Text" xml:space="preserve">
+    <value>Favoriler dosyasını okurken hata oluştu!
+[{0}]
+
+{1}</value>
+    <comment>0 - folder path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_SaveFolderFile_Error_Title" xml:space="preserve">
+    <value>HATA</value>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Text" xml:space="preserve">
+    <value>Favoriler dosyasını okurken hata oluştu!
+[{0}]
+
+{1}</value>
+    <comment>0 - folder list file path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_ParseFolderFile_Error_Title" xml:space="preserve">
+    <value>HATA</value>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Text" xml:space="preserve">
+    <value>Günlük dosyasını okurken hata oluştu!
+[{0}]
+
+{1}</value>
+    <comment>0 - log file path, 1 - exception message</comment>
+  </data>
+  <data name="GlobalHelper_ParseLogFile_Error_Title" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Positive_Text" xml:space="preserve">
+    <value>+{0} s</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_IdColumn_Header" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_TimeStampColumn_Header" xml:space="preserve">
+    <value>Zaman</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LevelColumn_Header" xml:space="preserve">
+    <value>Seviye</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MessageColumn_Header" xml:space="preserve">
+    <value>Mesaj</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_LoggerColumn_Header" xml:space="preserve">
+    <value>Logger</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MachineNameColumn_Header" xml:space="preserve">
+    <value>Makine Adı</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_HostNameColumn_Header" xml:space="preserve">
+    <value>HostAdı</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_UserNameColumn_Header" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_AppColumn_Header" xml:space="preserve">
+    <value>Uygulama</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ThreadColumn_Header" xml:space="preserve">
+    <value>İş Parçacığı</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_ClassColumn_Header" xml:space="preserve">
+    <value>Sınıf</value>
+  </data>
+  <data name="MainWindowVM_InitDataGrid_MethodColumn_Header" xml:space="preserve">
+    <value>Metod</value>
+  </data>
+  <data name="MainWindow_GridContextMenu_CopyToClipboard" xml:space="preserve">
+    <value>Panoya Kopyala</value>
+  </data>
+  <data name="MainWindowVM_AutoRefreshIntervalLocalized_Format" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>tr</value>
+  </data>
+  <data name="GlobalHelper_getTimeDelta_Negative_Text" xml:space="preserve">
+    <value>-{0} s</value>
+  </data>
+  <data name="MainWindow_FullDateTimeFormatWithMilliseconds" xml:space="preserve">
+    <value>dddd, MMMM d, yyyy h:mm:ss.fff tt</value>
+  </data>
+  <data name="CircularProgressBar_CircularProgressBar_BusyText" xml:space="preserve">
+    <value>Yükleniyor...</value>
+  </data>
+  <data name="About_Version_Text" xml:space="preserve">
+    <value>Versiyon {0}</value>
+    <comment>0 - FileVersionInfo</comment>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>YALV! Log4Net için aynı anda birden fazla günlük dosyasını karşılaştırmaya izin veren bir günlük görüntüleyicidir.
+
+ANA ÖZELLİKLER:
+- Günlük dosyaları birleştirme
+- Dinamik filtreleme
+- Dinamik göster/gizle günlük seviyeleri
+- Favori günlük klasörlerini kaydedin
+- En son kullanılan dosyaları açın
+- Sütun sıralama
+
+Log4Net yapılandırma dosyası, XmlLayoutSchemaLog4j düzeniyle kurulmalıdır; bu biçimi kullanacak şekilde yapılandırmak için uygulama yapılandırma dosyanızda birkaç satıra ihtiyacınız var (sağdaki örneklere bakın).
+
+.NET Framework 4.0 tabanlı ve C# dili ile yazılmış bir WPF Uygulamasıdır.</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
+    <value>Tüm Dosyaları Seç</value>
+  </data>
+  <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
+    <value>Tüm Dosyaları Temizle</value>
+  </data>
+</root>

@@ -105,6 +105,9 @@
     <Compile Include="AddFolderPath.xaml.cs">
       <DependentUpon>AddFolderPath.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectColumns.xaml.cs">
+      <DependentUpon>SelectColumns.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Components\BusyIndicatorBehavior\BusyIndicatorBehavior.cs" />
     <Compile Include="Common\Components\BusyIndicatorBehavior\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
@@ -120,6 +123,7 @@
     <Compile Include="Common\Components\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CommandReference.cs" />
     <Compile Include="Common\Converters\AdjustValueConverter.cs" />
     <Compile Include="Common\Converters\BoolToOppositeVisibilityConverter.cs" />
     <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
@@ -132,10 +136,21 @@
     <Compile Include="Common\GlobalHelper.cs" />
     <Compile Include="Common\Interfaces\ICommandAncestor.cs" />
     <Compile Include="Common\Interfaces\IWinSimple.cs" />
+    <Compile Include="ViewModel\SelectColumnsVM.cs" />
     <Compile Include="Common\RecentFileList.cs" />
     <Compile Include="Common\ScrollSynchronizer.cs" />
     <Compile Include="Common\Components\MainToolbar.xaml.cs">
       <DependentUpon>MainToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.pt-BR.Designer.cs">
+      <DependentUpon>Resources.pt-BR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.tr.Designer.cs">
+      <DependentUpon>Resources.tr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -159,6 +174,10 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\AddFolderPathVM.cs" />
+    <Page Include="SelectColumns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -222,6 +241,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pt-BR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.tr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.tr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.el.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
