@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,53 +10,169 @@ namespace YALV.Core.Providers
 {
     class JsonEntriesProvider : AbstractEntriesProvider
     {
+        // Reserved fields in Serilog Compact Log Event Format (CLEF)
+        private static readonly HashSet<string> CompactReservedFields = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "@t", "@mt", "@m", "@l", "@x", "@i", "@r", "@tr", "@sp"
+        };
+
         public override IEnumerable<LogItem> GetEntries(string dataSource, FilterParams filter)
         {
             var entryId = 1;
+            DateTime? prevTimeStamp = null;
 
-            FileStream fs = new FileStream(dataSource, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-            StreamReader sr = new StreamReader(fs);
-
-            while (!sr.EndOfStream)
+            using (var fs = new FileStream(dataSource, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite))
             {
-                var line = sr.ReadLine();
-                var lineObject = JsonConvert.DeserializeObject<JObject>(line);
-
-                LogItem entry = new LogItem()
+                using (var sr = new StreamReader(fs))
                 {
-                    File = dataSource,
-                    Message = lineObject.SelectToken("MessageTemplate")?.Value<String>() ?? "",
-                    TimeStamp = lineObject.SelectToken("Timestamp").Value<DateTime>(),
-                    Level = lineObject.SelectToken("Level")?.Value<String>().ToUpper() ?? "",
-                    App = lineObject.SelectToken("Properties").SelectToken("ProcessName")?.Value<String>() ?? "",
-                    Thread = lineObject.SelectToken("Properties").SelectToken("ThreadId")?.Value<String>() ?? "",
-                    MachineName = lineObject.SelectToken("Properties").SelectToken("MachineName")?.Value<String>() ?? "",
-                    UserName = lineObject.SelectToken("Properties").SelectToken("EnvironmentUserName")?.Value<String>() ?? "",
-                    Id = entryId,
-                    Path = dataSource
-                };
+                    while (!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine();
+                        if (string.IsNullOrWhiteSpace(line))
+                            continue;
 
-                // adjust LEVEL:
-                if (entry.Level == "INFORMATION")
-                    entry.Level = "INFO";
-                else if (entry.Level == "WARNING")
-                    entry.Level = "WARN";
+                        var lineObject = JsonConvert.DeserializeObject<JObject>(line);
 
+                        // Detect format: Serilog Compact (CLEF) uses "@t", standard uses "Timestamp"
+                        LogItem entry = lineObject.ContainsKey("@t")
+                            ? ParseCompactEntry(lineObject, dataSource, entryId)
+                            : ParseStandardEntry(lineObject, dataSource, entryId);
 
-                // replace properties into message template
-                foreach(JProperty property in lineObject.SelectToken("Properties").Children())
-                {
-                    string token = "{" + property.Name + "}";
-                    string value = property.Value.Value<string>();
+                        if (prevTimeStamp.HasValue)
+                            entry.Delta = (entry.TimeStamp - prevTimeStamp.Value).TotalSeconds;
+                        prevTimeStamp = entry.TimeStamp;
 
-                    entry.Message = entry.Message.Replace(token, value);
+                        if (filterByParameters(entry, filter))
+                        {
+                            yield return entry;
+                            entryId++;
+                        }
+                    }
                 }
+            }
+        }
 
-                if (filterByParameters(entry, filter))
+        private static LogItem ParseCompactEntry(JObject lineObject, string dataSource, int entryId)
+        {
+            var level = (lineObject.SelectToken("@l")?.Value<string>() ?? "Information").ToUpper();
+            if (level == "INFORMATION")
+                level = "INFO";
+            else if (level == "WARNING")
+                level = "WARN";
+
+            var messageTemplate = lineObject.SelectToken("@mt")?.Value<string>() ?? "";
+            var eventIdValue = GetEventIdValue(lineObject.SelectToken("EventId"));
+
+            var entry = new LogItem()
+            {
+                File = dataSource,
+                Message = string.IsNullOrEmpty(eventIdValue)
+                    ? messageTemplate
+                    : messageTemplate + Environment.NewLine + Environment.NewLine + eventIdValue,
+                TimeStamp = lineObject.SelectToken("@t").Value<DateTime>(),
+                Level = level,
+                App = lineObject.SelectToken("ProcessName")?.Value<string>() ?? "",
+                Thread = lineObject.SelectToken("ThreadId")?.Value<string>() ?? "",
+                MachineName = lineObject.SelectToken("MachineName")?.Value<string>() ?? "",
+                UserName = lineObject.SelectToken("EnvironmentUserName")?.Value<string>() ?? "",
+                Logger = lineObject.SelectToken("SourceContext")?.Value<string>() ?? "",
+                Throwable = lineObject.SelectToken("@x")?.Value<string>() ?? "",
+                Method = lineObject.SelectToken("RequestPath")?.Value<string>() ?? "",
+                Id = entryId,
+                Path = dataSource
+            };
+
+            // Replace property tokens in the message template; root-level non-reserved fields are properties
+            foreach (JProperty property in lineObject.Children<JProperty>())
+            {
+                if (CompactReservedFields.Contains(property.Name))
+                    continue;
+
+                string value = GetStringValue(property.Value);
+                if (value != null)
+                    entry.Message = entry.Message.Replace("{" + property.Name + "}", value);
+            }
+
+            return entry;
+        }
+
+        private static LogItem ParseStandardEntry(JObject lineObject, string dataSource, int entryId)
+        {
+            var level = (lineObject.SelectToken("Level")?.Value<string>() ?? "").ToUpper();
+            if (level == "INFORMATION")
+                level = "INFO";
+            else if (level == "WARNING")
+                level = "WARN";
+
+            var properties = lineObject.SelectToken("Properties");
+
+            var entry = new LogItem()
+            {
+                File = dataSource,
+                Message = lineObject.SelectToken("MessageTemplate")?.Value<string>() ?? "",
+                TimeStamp = lineObject.SelectToken("Timestamp").Value<DateTime>(),
+                Level = level,
+                App = properties?.SelectToken("ProcessName")?.Value<string>() ?? "",
+                Thread = properties?.SelectToken("ThreadId")?.Value<string>() ?? "",
+                MachineName = properties?.SelectToken("MachineName")?.Value<string>() ?? "",
+                UserName = properties?.SelectToken("EnvironmentUserName")?.Value<string>() ?? "",
+                Id = entryId,
+                Path = dataSource
+            };
+
+            // Replace property tokens in the message template
+            if (properties != null)
+            {
+                foreach (JProperty property in properties.Children<JProperty>())
                 {
-                    yield return entry;
-                    entryId++;
+                    string value = GetStringValue(property.Value);
+                    if (value != null)
+                        entry.Message = entry.Message.Replace("{" + property.Name + "}", value);
                 }
+            }
+
+            return entry;
+        }
+
+        private static string GetEventIdValue(JToken eventId)
+        {
+            if (eventId == null)
+                return "";
+
+            var info = "";
+            if (eventId.Type == JTokenType.Object)
+            {
+                var id = eventId["Id"]?.ToString();
+                var name = eventId["Name"]?.Value<string>();
+                if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(id))
+                    return "[EventId: " + id + " - " + name + "]";
+
+                info = name ?? id ?? "";
+                if (!string.IsNullOrEmpty(info))
+                    return $"[EventId: {info}]";
+                return "";
+            }
+
+            info = eventId.ToString();
+            if (!string.IsNullOrEmpty(info))
+                return $"[EventId: {info}]";
+
+            return "";
+        }
+
+        private static string GetStringValue(JToken token)
+        {
+            if (token == null)
+                return null;
+            switch (token.Type)
+            {
+                case JTokenType.String:
+                case JTokenType.Integer:
+                case JTokenType.Float:
+                case JTokenType.Boolean:
+                    return token.ToString();
+                default:
+                    return null;
             }
         }
 
