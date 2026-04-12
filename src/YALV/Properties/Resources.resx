@@ -529,4 +529,64 @@ It is a WPF Application based on .NET Framework 4.0 and written with C# language
   <data name="MainWindow_FilesListBoxContextMenu_SelectNone_Header" xml:space="preserve">
     <value>Clear All Files</value>
   </data>
+  <data name="ColumnSelection_ApplicationInfoGroup_Header" xml:space="preserve">
+    <value>Application information</value>
+  </data>
+  <data name="ColumnSelection_ApplicationInfo_Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="ColumnSelection_ApplicationInfo_HostName" xml:space="preserve">
+    <value>Host name</value>
+  </data>
+  <data name="ColumnSelection_ApplicationInfo_MachineName" xml:space="preserve">
+    <value>Machine name</value>
+  </data>
+  <data name="ColumnSelection_ApplicationInfo_UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="ColumnSelection_BasicInfoGroup_Header" xml:space="preserve">
+    <value>Basic information</value>
+  </data>
+  <data name="ColumnSelection_BasicInfo_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="ColumnSelection_BasicInfo_Logger" xml:space="preserve">
+    <value>Logger</value>
+  </data>
+  <data name="ColumnSelection_BasicInfo_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="ColumnSelection_BasicInfo_Thread" xml:space="preserve">
+    <value>Thread</value>
+  </data>
+  <data name="ColumnSelection_BasicInfo_Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
+  <data name="ColumnSelection_LocationInfoGroup_Header" xml:space="preserve">
+    <value>Location information</value>
+  </data>
+  <data name="ColumnSelection_LocationInfo_Class" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="ColumnSelection_LocationInfo_Method" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="ColumnSelection_Description" xml:space="preserve">
+    <value>Select columns to appear in the Main window:</value>
+  </data>
+  <data name="ColumnSelection_Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="ColumnSelection_Title" xml:space="preserve">
+    <value>YALV! - Column Selection</value>
+  </data>
+  <data name="ColumnSelection_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ColumnSelection_Button_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MainWindow_GridColumnHeaderContextMenu_SelectColumns" xml:space="preserve">
+    <value>Select columns...</value>
+  </data>
 </root>
