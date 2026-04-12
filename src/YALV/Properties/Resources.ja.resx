@@ -376,7 +376,7 @@
     <value>選択</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="SaveFolderPath_Title" xml:space="preserve">
     <value>YALV! - フォルダー・パスの保存</value>
@@ -391,7 +391,7 @@
     <value>YALV! について</value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="About_AboutGroupBox_Header" xml:space="preserve">
     <value>About</value>
@@ -514,7 +514,7 @@
 
 Log4Net の設定ファイルは "XmlLayoutSchemaLog4j" レイアウトである必要があります。数行をアプリケーション設定に足すことにより対応できます。(右側のサンプルをご覧ください)
 
-.NET Framework 4.0 をベースとした、C# で書かれた WPF アプリケーションです。</value>
+.NET Framework 4.8 をベースとした、C# で書かれた WPF アプリケーションです。</value>
   </data>
   <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
     <value>すべて選択</value>

@@ -379,7 +379,7 @@
     <value>FİLTRELE</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="SaveFolderPath_Title" xml:space="preserve">
     <value>YALV! - Favorileri Düzenle</value>
@@ -394,7 +394,7 @@
     <value>YALV! - Hakkında</value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="About_AboutGroupBox_Header" xml:space="preserve">
     <value>Hakkında</value>
@@ -509,7 +509,7 @@
     <comment>0 - FileVersionInfo</comment>
   </data>
   <data name="About_Description" xml:space="preserve">
-    <value>YALV! Log4Net için aynı anda birden fazla günlük dosyasını karşılaştırmaya izin veren bir günlük görüntüleyicidir.
+    <value>YALV! Log4Net/Serilog için aynı anda birden fazla günlük dosyasını karşılaştırmaya izin veren bir günlük görüntüleyicidir.
 
 ANA ÖZELLİKLER:
 - Günlük dosyaları birleştirme
@@ -521,7 +521,7 @@ ANA ÖZELLİKLER:
 
 Log4Net yapılandırma dosyası, XmlLayoutSchemaLog4j düzeniyle kurulmalıdır; bu biçimi kullanacak şekilde yapılandırmak için uygulama yapılandırma dosyanızda birkaç satıra ihtiyacınız var (sağdaki örneklere bakın).
 
-.NET Framework 4.0 tabanlı ve C# dili ile yazılmış bir WPF Uygulamasıdır.</value>
+.NET Framework 4.8 tabanlı ve C# dili ile yazılmış bir WPF Uygulamasıdır.</value>
   </data>
   <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
     <value>Tüm Dosyaları Seç</value>

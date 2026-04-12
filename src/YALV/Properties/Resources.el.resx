@@ -379,7 +379,7 @@
     <value>Επιλογή</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="SaveFolderPath_Title" xml:space="preserve">
     <value>YALV! - Επεξεργασία Αγαπημένων</value>
@@ -394,7 +394,7 @@
     <value>YALV! - Περί</value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="About_AboutGroupBox_Header" xml:space="preserve">
     <value>Περί</value>
@@ -521,7 +521,7 @@
 
 Το αρχείο ρυθμίσεων Log4Net πρέπει να συσταθεί με διάταξη XmlLayoutSchemaLog4j. Χρειάζονται απλά λίγες γραμμές στο αρχείο ρυθμίσεων της εφαρμογής για να ρυθμιστεί ώστε να χρησιμοποιεί αυτήν τη μορφή (δείτε τα παραδείγματα στα δεξιά).
 
-Πρόκειται για μια εφαρμογή WPF που βασίζεται στο .NET Framework 4.0 και γραμμένο με γλώσσα C#.</value>
+Πρόκειται για μια εφαρμογή WPF που βασίζεται στο .NET Framework 4.8 και γραμμένο με γλώσσα C#.</value>
   </data>
   <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
     <value>Επιλογή όλων</value>

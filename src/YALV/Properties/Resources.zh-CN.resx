@@ -379,7 +379,7 @@
     <value>选择</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="SaveFolderPath_Title" xml:space="preserve">
     <value>YALV! - 编辑收藏夹</value>
@@ -394,7 +394,7 @@
     <value>YALV! - 关于</value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="About_AboutGroupBox_Header" xml:space="preserve">
     <value>关于</value>
@@ -521,7 +521,7 @@
 
 Log4Net 配置必须设为 XmlLayoutSchemaLog4j 布局；在您的应用程序配置文件中仅需少量几行就可以配置使用这种格式（参见右侧示例）。
 
-这是一款基于 .NET Framework 4.0，使用 C# 语言编写的 WPF 应用程序。</value>
+这是一款基于 .NET Framework 4.8，使用 C# 语言编写的 WPF 应用程序。</value>
   </data>
   <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
     <value>全选</value>

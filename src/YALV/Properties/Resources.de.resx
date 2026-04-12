@@ -379,7 +379,7 @@
     <value>AUSWAHL</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="SaveFolderPath_Title" xml:space="preserve">
     <value>YALV! - Verzeichnispfad speichern</value>
@@ -394,7 +394,7 @@
     <value>YALV! - Info</value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
-    <value>YALV! - Yet Another Log4Net Viewer</value>
+    <value>YALV! - Yet Another Log Viewer</value>
   </data>
   <data name="About_AboutGroupBox_Header" xml:space="preserve">
     <value>Programminfo</value>
@@ -509,7 +509,7 @@
     <comment>0 - FileVersionInfo</comment>
   </data>
   <data name="About_Description" xml:space="preserve">
-    <value>YALV! ist ein Betrachter für Logdateien von Log4Net, der den gleichzeitigen Vergleich mehrerer Logdateien ermöglicht.
+    <value>YALV! ist ein Betrachter für Logdateien von Log4Net/Serilog, der den gleichzeitigen Vergleich mehrerer Logdateien ermöglicht.
 
 HAUPTMERKMALE:
 - Verbinden von Logdateien
@@ -521,7 +521,7 @@ HAUPTMERKMALE:
 
 Die Konfiguration von Log4Net muss das Layout "XmlLayoutSchemaLog4j" enthalten. Einfach ein paar Zeilen in die Konfigurationsdatei der Anwendung einfügen (siehe Beispiele auf der rechten Seite).
 
-Diese Anwendung basiert auf das .NET Framework 4.0 mit WPF unter Verwendung ver Programmiersprache C#.</value>
+Diese Anwendung basiert auf das .NET Framework 4.8 mit WPF unter Verwendung ver Programmiersprache C#.</value>
   </data>
   <data name="MainWindow_FilesListBoxContextMenu_SelectAll_Header" xml:space="preserve">
     <value>Alles Auswählen</value>

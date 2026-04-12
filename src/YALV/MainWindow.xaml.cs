@@ -1,10 +1,11 @@
 ﻿#region About
 /*
- * YALV! - Yet Another Log4Net Viewer
+ * YALV! - Yet Another Log Viewer
  * 
  * YALV! is a log viewer for Log4Net that allow to compare multiple logs file simultaneously.
  * Log4Net config file must be setup with XmlLayoutSchemaLog4j layout.
- * It is a WPF Application based on .NET Framework 4.0 and written with C# language.
+ * For Serilog JSON logs, YALV supports both the standard JSON output and the compact format.
+ * It is a WPF Application based on .NET Framework 4.8 and written with C# language.
  *
  * An open source application developed by Luca Petrini - http://www.linkedin.com/in/lucapetrini
  * 
